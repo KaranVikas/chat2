@@ -159,39 +159,13 @@ const SideDrawer = () => {
             </div>
           </div>
         </div>
-        <div className="d-flex justify-content-between">
-          {/* <nav className="navbar navbar-expand-lg bg-light">
-            <div className="container-fluid">
-              <button
-                className="navbar-toggler"
-                type="button"
-                data-bs-toggle="collapse"
-                data-bs-target="#navbarTogglerDemo03"
-                aria-controls="navbarTogglerDemo03"
-                aria-expanded="false"
-                aria-label="Toggle navigation"
-              >
-                <span className="navbar-toggler-icon"></span>
-              </button>
-
-              <div
-                className="collapse navbar-collapse"
-                id="navbarTogglerDemo03"
-              >
-                <ul className="navbar-nav me-auto mb-2 mb-lg-0">
-                  <a className="navbar-brand"></a>
-                </ul>
-                <ul className="navbar-nav me-auto mb-2 mb-lg-0">
-                  <a className="navbar-brand">ChatApplication</a>
-                </ul>
-              </div>
-            </div>
-          </nav> */}
+        <div className="d-flex justify-content-between px-5">
+          
           <h4 style={{ fontSize: "x-large" }}>Chat Application</h4>
           <Modal show={show} />
         </div>
         <div className="">
-          <i className="fa-solid fa-bell" />
+          <i className="fa-solid fa-bell" style={{fontSize:"larger"}} />
         </div>
         <div className="dropdown">
           <button

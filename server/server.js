@@ -4,7 +4,8 @@ const dotenv = require('dotenv')
 const connectDB = require('./config/db');
 const colors = require("colors")
 const userRoutes = require("./routes/userRoutes");
-const chatRoutes = require("./routes/chatRoutes")
+const chatRoutes = require("./routes/chatRoutes");
+const messageRoutes = require("./routes/messageRoutes")
 const router = require('./routes/chatRoutes')
 
 
@@ -36,7 +37,8 @@ app.use(express.json());
 // });
 
 app.use("/api/user", userRoutes);
-app.use("/api/chat", chatRoutes)
+app.use("/api/chat", chatRoutes);
+app.use("/api/message",messageRoutes);
 
 // adding errorhandling api if we go route that doesn't exist 
 app.use(notFound)

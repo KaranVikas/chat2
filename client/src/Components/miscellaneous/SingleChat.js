@@ -9,12 +9,13 @@ import ScrollableChat from "../ScrollableChat";
 import io from "socket.io-client";
 
 const ENDPOINT = "http://localhost:5000";
-var socket, selectedChatCompare;
+var selectedChatCompare;
 
 const SingleChat = ({ fetchAgain, setFetchAgain }) => {
   const [messages, setMessages] = useState([]);
   const [loading, setLoading] = useState(false);
   const [newMessage, setNewMessage] = useState();
+  const [socket] = useState(io(ENDPOINT));
   const [socketConnected, setsocketConnected] = useState(false);
 
   const { user, selectedChat, setSelectedChat } = ChatState();
@@ -40,7 +41,7 @@ const SingleChat = ({ fetchAgain, setFetchAgain }) => {
 
       setLoading(false);
 
-      socket.emit("join chat", selectedChat._id);
+      // socket.emit("join chat", selectedChat._id);
     } catch (error) {
       // toast function -> Error Occurred
       console.log("Failed to load the Messages");
@@ -48,9 +49,22 @@ const SingleChat = ({ fetchAgain, setFetchAgain }) => {
   };
 
   useEffect(() => {
-    socket = io(ENDPOINT);
-    socket.emit("setup", user);
-    socket.on("connection", () => setsocketConnected(true));
+    if (!socket.connected) {
+      socket.connect;
+    }
+    socket.on("connect", () => {
+      // socket.on("message recieved", () => {
+      //   console.log("MESSAGE RECIEVED");
+      // });
+    });
+
+    // socket.on("connect", (client) => console.log("PLEASE CONNECT"));
+
+    // socket.emit("setup", user);
+    // socket.on("connection", () => {
+    //   setsocketConnected(true);
+    //   console.log("commectes");
+    // });
   }, []);
 
   useEffect(() => {
@@ -58,21 +72,26 @@ const SingleChat = ({ fetchAgain, setFetchAgain }) => {
     selectedChatCompare = selectedChat;
   }, [selectedChat]);
 
-  useEffect(() => {
-    socket.on("message recieved ", (newMessageRecieved) => {
-      if (
-        !selectedChatCompare ||
-        selectedChatCompare._id !== newMessageRecieved.chat._id
-      ) {
-        //give notification
-      } else {
-        setMessages([...messages, newMessageRecieved]);
-      }
-    });
-  });
+  // useEffect(() => {
+  //   if (socketConnected) {
+  //     socket.on("message recieved", (newMessageRecieved) => {
+  //       console.log("message recieved");
+  //       if (
+  //         !selectedChatCompare ||
+  //         selectedChatCompare._id !== newMessageRecieved.chat._id
+  //       ) {
+  //         //give notification
+  //       } else {
+  //         // setMessages([...messages, newMessageRecieved]);
+  //       }
+  //     });
+  //   }
+  // }, [socketConnected]);
 
   const sendMessage = async (event) => {
     if (event.key === "Enter" && newMessage) {
+      console.log("send");
+
       try {
         const config = {
           headers: {
@@ -80,7 +99,6 @@ const SingleChat = ({ fetchAgain, setFetchAgain }) => {
             Authorization: `Bearer ${user.token}`,
           },
         };
-
         const { data } = await axios.post(
           "/api/message",
           {
@@ -90,12 +108,38 @@ const SingleChat = ({ fetchAgain, setFetchAgain }) => {
           config
         );
         console.log(data);
-
+        setNewMessage("");
         socket.emit("new message", data);
-        setNewMessage([...messages, data]);
-        setMessages(data);
-      } catch (error) {}
+        // socket.emit("message recieved", data);
+        // socket.emit("new message", data);
+        // setNewMessage([...messages, data]);
+        // setMessages(data);
+      } catch (error) {
+        console.log("OOPS", error);
+      }
     }
+    // if (event.key === "Enter" && newMessage) {
+    //   try {
+    //     const config = {
+    //       headers: {
+    //         "Content-Type": "application/json",
+    //         Authorization: `Bearer ${user.token}`,
+    //       },
+    //     };
+    //     const { data } = await axios.post(
+    //       "/api/message",
+    //       {
+    //         content: newMessage,
+    //         chatId: selectedChat._id,
+    //       },
+    //       config
+    //     );
+    //     console.log(data);
+    //     socket.emit("new message", data);
+    //     setNewMessage([...messages, data]);
+    //     setMessages(data);
+    //   } catch (error) {}
+    // }
   };
 
   const typingHandler = (e) => {

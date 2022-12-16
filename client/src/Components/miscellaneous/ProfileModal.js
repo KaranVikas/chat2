@@ -3,7 +3,7 @@ import React from "react";
 const ProfileModal = ({ user, children, show }) => {
   return (
     <div>
-      {/* {show && (
+      {show && (
         <>
           <h1>hello</h1>
           <div
@@ -42,8 +42,14 @@ const ProfileModal = ({ user, children, show }) => {
             </div>
           </div>
         </>
-      )} */}
-      {children ? <span>{children}</span> : <span>EYE Icon</span>}
+      )}
+      {children ? (
+        <span>{children}</span>
+      ) : (
+        <span>
+          <i className="fas fa-eye"></i>
+        </span>
+      )}
 
       <div>{/* <!-- Button trigger modal --> */}</div>
     </div>

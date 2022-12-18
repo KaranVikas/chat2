@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { ChatState } from "../../Context/ChatProvider";
 import ChatLoading from "../miscellaneous/ChatLoading";
 import axios from "axios";
-import { getSender } from "../../config/ChatLogics";
+import { getSender, getSenderPic } from "../../config/ChatLogics";
 import GroupChatModal from "./GroupChatModal";
 
 const MyChats = ({ fetchAgain }) => {
@@ -35,11 +35,11 @@ const MyChats = ({ fetchAgain }) => {
   }, [selectedChat]);
   return (
     <>
-      <div className="container p-1 " style={{ border: "2px solid red" }}>
-        <div className="d-flex justify-content-between ">
-          My Chats
+      <div className="col-4  p-1 pe-2" style={{ borderRight: "2px solid black" }}>
+        <div className="d-flex justify-content-between align-items-center ">
+          <h3 style={{fontSize:"24px"}}>My Chats</h3>
           <GroupChatModal>
-            <button className="btn btn-primary">New Group Chat +</button>
+            {/* <button className="btn btn-light">New Group Chat +</button> */}
           </GroupChatModal>
         </div>
 
@@ -47,27 +47,50 @@ const MyChats = ({ fetchAgain }) => {
 
         {chats ? (
           // issue make it scrollable
-          <div className="m-1 p-2 h-100" style={{ backgroundColor: "#f6f6f6" }}>
+          <div className="m-1 mt-3 p-2 " style={{ backgroundColor: "#f6f6f6", overflow:"scroll", height:"80vh" }}>
             {chats.map((chat) => (
               <div
-                className="m-1 p-2"
+                className="m-1 p-2 d-flex"
                 onClick={() => {
                   setSelectedChat(chat);
                   console.log({ selectedChat });
                   console.log({ chat });
                 }}
                 style={{
-                  border: "1px solid black",
+                  border:" ",
                   cursor: "pointer",
-                  backgroundColor: "#bbbbbb",
-                  borderRadius: "2rem",
+                  backgroundColor: `${selectedChat === chat ? "#f3f5f9" : "#E8E8E8"}`,
+                  color: `${selectedChat === chat ? "" : ""}`,
+                  borderLeft:`${selectedChat === chat ? "6px solid #3439cd" : ""}`,
+                  
                 }}
                 key={chat._id}
               >
-                <div>
-                  {!chat.isGroupChat
-                    ? getSender(loggedUser, chat.users)
-                    : chat.chatName}
+                <div className="mx-2 p-1 me-4">
+                  <img src={!chat.isGroupChat
+                    ? getSenderPic(loggedUser, chat.users)
+                    : "https://medix21.com.au/wp-content/themes/medix21%20AU/images/avatar.png"
+                    } style={{width:"40px", height:"40px"}}/>
+                </div>
+                <div children="flex-column">
+                  <div>
+                    {!chat.isGroupChat
+                      ? getSender(loggedUser, chat.users)
+                      : chat.chatName}
+                  </div>
+                  <div>
+                    {
+                      chat.latestMessage && (
+                        <div>
+                          <b>{chat.latestMessage.sender.name} : </b>
+                            {chat.latestMessage.content.length > 50
+                              ? chat.latestMessage.content.substring(0, 51) + "..."
+                              : chat.latestMessage.content
+                            }
+                        </div>
+                      )
+                    }
+                  </div>
                 </div>
               </div>
             ))}

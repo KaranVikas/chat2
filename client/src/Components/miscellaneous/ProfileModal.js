@@ -5,17 +5,17 @@ const ProfileModal = ({ user, children, show }) => {
     <div>
       {show && (
         <>
-          <h1>hello</h1>
+          
           <div
-            id="exampleModal"
+            id="profileModal"
             tabindex="-1"
-            aria-labelledby="exampleModalLabel"
+            aria-labelledby="profileModalLabel"
             aria-hidden="true"
           >
             <div className="modal-dialog">
               <div className="modal-content">
                 <div className="modal-header">
-                  <h1 className="modal-title fs-5" id="exampleModalLabel">
+                  <h1 className="modal-title fs-5" id="profileModalLabel">
                     Modal title
                   </h1>
                   <button

@@ -6,7 +6,7 @@ import Modal from './Modal';
 import ProfileModal from './ProfileModal';
 import UserListItem from '../UserAvatar/UserListItem'
 import axios from 'axios';
-
+import { getSender } from '../../config/ChatLogics';
 
 
 const SideDrawer = () => {
@@ -21,7 +21,7 @@ const SideDrawer = () => {
 		console.log("clicked on show")
 	}
 
-	const { user, setSelectedChat, chats, setChats } = ChatState();
+	const { user, setSelectedChat, chats, setChats, notification, setNotification } = ChatState();
   const history = useHistory()
 
   const logoutHandler = () => {
@@ -82,16 +82,17 @@ const SideDrawer = () => {
   }
   return (
     <>
-      <div className="d-flex container-fluid justify-content-between align-items-center">
-        <div>
+      <div className="d-flex container-fluid justify-content-between align-items-center" 
+        style={{border:"1px solid black"}}>
+        <div >
           <button
-            className="btn btn-primary"
+            className="btn btn-light "
             type="button"
             data-bs-toggle="offcanvas"
             data-bs-target="#offcanvasExample"
             aria-controls="offcanvasExample"
           >
-            <i className="fa-solid fa-search p-1" />
+            <i className="fa-solid fa-search p-1 px-2 pe-3" />
             Search User
           </button>
 
@@ -116,7 +117,7 @@ const SideDrawer = () => {
             <div className="offcanvas-body">
               <div>
                 {/* <form className="d-flex" role="search"> */}
-                <div className='d-flex mb-1'>
+                <div className='d-flex mb-3'>
                   <input
                     className="form-control me-2"
                     type="search"
@@ -134,6 +135,7 @@ const SideDrawer = () => {
                     Go
                   </button>
                 </div>
+                
                 {/* </form> */}
                 {/* if  loading show component else show results */}
                 {loading ? (
@@ -153,8 +155,7 @@ const SideDrawer = () => {
                   user={user}
                   handleFunction={()=>accessChat(user._id)}/>
               )))} */}
-                Some text as placeholder. In real life you can have the elements
-                you have chosen. Like, text, images, lists, etc.
+                
               </div>
             </div>
           </div>
@@ -164,12 +165,24 @@ const SideDrawer = () => {
           <h4 style={{ fontSize: "x-large" }}>Chat Application</h4>
           <Modal show={show} />
         </div>
-        <div className="">
-          <i className="fa-solid fa-bell" style={{fontSize:"larger"}} />
+        <div className="d-flex justify-content-center">
+          <i className="fa-solid fa-bell p-1 pe-4" style={{fontSize:"larger"}} />
+          {!notification.length && "No New Message"}
+          {notification.map((notif) => (
+            <div  key={notif._id} 
+              onClick={() => {
+              setSelectedChat(notif.chat)
+              setNotification(notification.filter((n) => n !== notif))
+            }}>
+              {notif.chat.isGroupChat
+               ? `New Message in ${notif.chat.chatName}`
+               : `New Message from ${getSender(user, notif.chat.users)}` }
+            </div>
+          ))}
         </div>
         <div className="dropdown">
           <button
-            className="btn btn-secondary dropdown-toggle d-flex align-items-center "
+            className="btn btn-light dropdown-toggle d-flex align-items-center mt-2 "
             type="button"
             data-bs-toggle="dropdown"
             aria-expanded="false"
@@ -187,7 +200,7 @@ const SideDrawer = () => {
             className="dropdown-menu dropdown-menu-dark"
             style={{ backgroundColor: "#f8f9fa", minWidth: "8rem" }}
           >
-            <li className="mb-1">
+            {/* <li className="mb-1">
               <ProfileModal user={user} show={show}>
                 <button
                   onClick={showModal}
@@ -199,9 +212,9 @@ const SideDrawer = () => {
                   My Profile 2
                 </button>
               </ProfileModal>
-            </li>
-            <hr style={{ border: "1px solid black" }} />
-            <li>
+            </li> */}
+            {/* <hr style={{ border: "1px solid black" }} /> */}
+            <li className='d-flex justify-content-center'>
               <button
                 onClick={logoutHandler}
                 type="button"
@@ -212,6 +225,7 @@ const SideDrawer = () => {
             </li>
           </ul>
         </div>
+        
       </div>
     </>
   );

@@ -4,19 +4,19 @@ import { ChatState } from '../../Context/ChatProvider'
 const UserListItem = ({user, handleFunction }) => {
 
   return (
-    <div className='m-2' style={{backgroundColor:"gray", cursor:"pointer"}} onClick={handleFunction} >
+    <div className='m-1' style={{backgroundColor:"#f6f6f6", cursor:"pointer"}} onClick={handleFunction} >
       <button
         onClick={handleFunction}
-        className="d-flex align-content-center p-1"
+        className="d-flex  p-1"
         style={{ width: "4rem"}}
       >
-        <img src={user.pic} className="p-1" alt="..." style={{cursor:"pointer"}}/>
-        <div className="d-flex flex-column justify-content-center flex-wrap p-1">
-          <h4 className="">{user.name}</h4>
-          <h6 className="">
-            <b>Email: </b>
+        <img src={user.pic} className="p-1" alt="..." style={{cursor:"pointer", borderRadius:"50%"}}/>
+        <div className="d-flex flex-column  flex-wrap ps-2">
+          <span className="d-flex "><b>{user.name}</b></span>
+          <div className="d-flex  ">
+            <b className='pe-1'>Email: </b>
             {user.email}
-          </h6>
+          </div>
         </div>
       </button>
     </div>

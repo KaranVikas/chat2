@@ -137,11 +137,12 @@ const UpdateGroupChatModal = ({ fetchAgain, setFetchAgain, fetchMessages  }) => 
     <div>
       <i
         type="button"
-        className="fa-solid fa-eye"
+        className="fa-solid fa-eye pe-2"
         data-bs-toggle="modal"
         data-bs-target="#demoModal"
+        
       >
-        Group
+        
         
       </i>
 

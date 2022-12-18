@@ -7,7 +7,7 @@ const ScrollableChat = ({messages}) => {
 
     const { user } = ChatState();
   return (
-    <div>{messages && messages.map((m,i) => (
+    <div>{messages && messages.map((m, i) => (
         <div style={{display:"flex"}} key={m._id}>
             {
                 (isSameSender(messages, m, i, user._id)
@@ -18,7 +18,11 @@ const ScrollableChat = ({messages}) => {
                 <span 
                     style = {{
                         backgroundColor: `${
-                            m.sender._id === user._id ? "#BEE3F8" : "B9F5D0"
+                            m.sender._id === user._id ? "#3439cd" : "#ecf3fe"
+                            
+                        }`,
+                        color: `${
+                            m.sender._id === user._id ? "#FFFFFF" : ""
                             
                         }`,
                         borderRadius:"20px",

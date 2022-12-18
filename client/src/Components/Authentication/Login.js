@@ -97,8 +97,6 @@ const Login = () => {
         </button>
       </div>
 
-      {console.log(name)}
-      {console.log("hi")}
     </div>
   );
 }

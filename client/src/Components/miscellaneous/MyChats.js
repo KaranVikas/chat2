@@ -35,7 +35,10 @@ const MyChats = ({ fetchAgain }) => {
   }, [selectedChat]);
   return (
     <>
-      <div className="col-4  p-1 pe-2" style={{ borderRight: "2px solid black" }}>
+      <div className="col-12 col-sm-4 p-1 pe-2" style={{ 
+      // to hide chat button
+      display:`${selectedChat ? "none" : "block" }`
+      }}>
         <div className="d-flex justify-content-between align-items-center ">
           <h3 style={{fontSize:"24px"}}>My Chats</h3>
           <GroupChatModal>
@@ -70,7 +73,7 @@ const MyChats = ({ fetchAgain }) => {
                   <img src={!chat.isGroupChat
                     ? getSenderPic(loggedUser, chat.users)
                     : "https://medix21.com.au/wp-content/themes/medix21%20AU/images/avatar.png"
-                    } style={{width:"40px", height:"40px"}}/>
+                    } style={{width:"40px", height:"40px", objectFit:"fill"}}/>
                 </div>
                 <div children="flex-column">
                   <div>

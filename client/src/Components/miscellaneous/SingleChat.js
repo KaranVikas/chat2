@@ -17,7 +17,8 @@ const SingleChat = ({ fetchAgain, setFetchAgain }) => {
   const [newMessage, setNewMessage] = useState("");
   const [socketConnected, setsocketConnected] = useState(false);
 
-  const { user, selectedChat, setSelectedChat,notification, setNotification  } = ChatState();
+  const { user, selectedChat, setSelectedChat, notification, setNotification } =
+    ChatState();
   //console.log("SELE", selectedChat);
 
   const fetchMessages = async () => {
@@ -59,21 +60,20 @@ const SingleChat = ({ fetchAgain, setFetchAgain }) => {
     selectedChatCompare = selectedChat;
   }, [selectedChat]);
 
- // console.log(notification,"--------------");
+  // console.log(notification,"--------------");
 
   useEffect(() => {
     socket.on("message received", (newMessageRecieved) => {
-      console.log("message Rece on clie")
+      console.log("message Rece on clie");
       if (
         !selectedChatCompare ||
         selectedChatCompare._id !== newMessageRecieved.chat._id
       ) {
         //give notification if selected chat is not selected
-        if(!notification.includes(newMessageRecieved)){
+        if (!notification.includes(newMessageRecieved)) {
           setNotification([newMessageRecieved, ...notification]);
           setFetchAgain(!fetchAgain);
         }
-
       } else {
         setMessages([...messages, newMessageRecieved]);
       }
@@ -107,7 +107,6 @@ const SingleChat = ({ fetchAgain, setFetchAgain }) => {
   //   }
   // };
 
-
   const sendMessage = async (event) => {
     if (event.key === "Enter" && newMessage) {
       try {
@@ -117,7 +116,7 @@ const SingleChat = ({ fetchAgain, setFetchAgain }) => {
             Authorization: `Bearer ${user.token}`,
           },
         };
-          setNewMessage("")
+        setNewMessage("");
         const { data } = await axios.post(
           "/api/message",
           {
@@ -129,12 +128,12 @@ const SingleChat = ({ fetchAgain, setFetchAgain }) => {
         console.log(data);
 
         socket.emit("new message", data);
-        console.log(data)
+        console.log(data);
         //setNewMessage([...messages, data]);
         setMessages([...messages, data]);
       } catch (error) {
         // toast -> Failed to send the message
-        console.log("Failed to send the message")
+        console.log("Failed to send the message");
       }
     }
   };
@@ -149,11 +148,8 @@ const SingleChat = ({ fetchAgain, setFetchAgain }) => {
       {selectedChat != undefined ? (
         <>
           <h5 className="d-flex justify-content-between align-items-center">
-            <button
-              className="btn btn-light"
-              onClick={() => setSelectedChat("")}
-            >
-              <i className="fa-solid fa-arrow-left"/>
+            <button className="btn btn-light" onClick={() => setSelectedChat()}>
+              <i className="fa-solid fa-arrow-left" />
             </button>
             {!selectedChat.isGroupChat ? (
               <>
@@ -201,7 +197,7 @@ const SingleChat = ({ fetchAgain, setFetchAgain }) => {
         </>
       ) : (
         <div
-          className="d-flex justify-content-center align-items-center h-100"
+          className="d-sm-flex d-none d-flex justify-content-center align-items-center h-100"
           style={{ border: "1px solid black" }}
         >
           <h5> Click on user to start Chatting</h5>

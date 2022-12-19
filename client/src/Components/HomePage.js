@@ -18,10 +18,14 @@ const Homepage = () => {
     <div>
       <div className="container" style={{ border: "2px solid red" }}>
         Homepage
-       
-        <ul className="nav nav-pills mb-3 justify-content-center" id="pills-tab" role="tablist">
+        <ul
+          className="nav nav-pills mb-3 justify-content-center"
+          id="pills-tab"
+          role="tablist"
+        >
           <li className="nav-item" role="presentation">
             <button
+              //style={{ backgroundColor: "#3339cd" }}
               className="nav-link active"
               id="pills-home-tab"
               data-bs-toggle="pill"
@@ -49,7 +53,6 @@ const Homepage = () => {
             </button>
           </li>
         </ul>
-
         <div className="tab-content" id="pills-tabContent">
           <div
             className="tab-pane fade show active"
@@ -69,8 +72,6 @@ const Homepage = () => {
           >
             <Signup />
           </div>
-          
-         
         </div>
       </div>
     </div>

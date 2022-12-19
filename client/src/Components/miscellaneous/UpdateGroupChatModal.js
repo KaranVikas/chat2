@@ -3,6 +3,8 @@ import React, { useState } from "react";
 import { ChatState } from "../../Context/ChatProvider";
 import UserBadgeItem from "../UserAvatar/UserBadgeItem";
 import UserListItem from "../UserAvatar/UserListItem";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const UpdateGroupChatModal = ({ fetchAgain, setFetchAgain, fetchMessages  }) => {
   const [groupChatName, setGroupChatName] = useState();
@@ -11,10 +13,16 @@ const UpdateGroupChatModal = ({ fetchAgain, setFetchAgain, fetchMessages  }) => 
   const [loading, setLoading] = useState(false);
   const { selectedChat, setSelectedChat, user } = ChatState();
   const [renameloading, setRenameloading] = useState(false);
+  
+
 
   const handleAddUser = async (user1) => {
     if (selectedChat.users.find((u) => u._id === user1._id)) {
       //toast User Already in group
+      const notify = () => {
+        toast("User already in group! ");
+      };
+      notify();
       console.log("user already in group!");
     }
     if (selectedChat.groupAdmin._id !== user._id) {
@@ -49,6 +57,10 @@ const UpdateGroupChatModal = ({ fetchAgain, setFetchAgain, fetchMessages  }) => 
   const handleRemove = async (user1) => {
     if (selectedChat.groupAdmin._id !== user._id && user1._id !== user._id) {
       // toast only admins can remove someone
+      const notify = () => {
+        toast("Only admins can remove someone! ");
+      };
+      notify();
       console.log("only admins can remove someone! ");
     }
     try {
@@ -140,10 +152,7 @@ const UpdateGroupChatModal = ({ fetchAgain, setFetchAgain, fetchMessages  }) => 
         className="fa-solid fa-eye pe-2"
         data-bs-toggle="modal"
         data-bs-target="#demoModal"
-        
       >
-        
-        
       </i>
 
       <div
@@ -219,12 +228,14 @@ const UpdateGroupChatModal = ({ fetchAgain, setFetchAgain, fetchMessages  }) => 
                 className="btn btn-danger"
                 onClick={() => handleRemove(user)}
               >
-                Save Leave Group
+                Save Group changes
               </button>
             </div>
           </div>
         </div>
       </div>
+        
+      <ToastContainer />
     </div>
   );
 };

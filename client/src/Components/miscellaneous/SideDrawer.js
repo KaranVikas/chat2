@@ -2,11 +2,13 @@ import React, { useState } from 'react'
 import { useHistory } from 'react-router-dom';
 import { ChatState } from '../../Context/ChatProvider';
 import ChatLoading from './ChatLoading';
-import Modal from './Modal';
+
 import ProfileModal from './ProfileModal';
 import UserListItem from '../UserAvatar/UserListItem'
 import axios from 'axios';
 import { getSender } from '../../config/ChatLogics';
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 
 const SideDrawer = () => {
@@ -34,6 +36,11 @@ const SideDrawer = () => {
     console.log(search)
     if(!search){
       // toast function to throw error
+      const notify = () => {
+        toast("Please Enter something ");
+      };
+      notify();
+      
       console.log("please Enter something ")
     }
 
@@ -82,18 +89,20 @@ const SideDrawer = () => {
   }
   return (
     <>
-      <div className="d-flex container-fluid justify-content-between align-items-center" 
-        style={{border:"1px solid black"}}>
-        <div >
+      <div
+        className="d-flex container-fluid justify-content-between align-items-center"
+        style={{ border: "" }}
+      >
+        <div>
           <button
-            className="btn btn-light "
+            className="btn btn-light m-1 "
             type="button"
             data-bs-toggle="offcanvas"
             data-bs-target="#offcanvasExample"
             aria-controls="offcanvasExample"
           >
             <i className="fa-solid fa-search p-1 px-2 pe-3" />
-            Search User
+            Search
           </button>
 
           <div
@@ -117,7 +126,7 @@ const SideDrawer = () => {
             <div className="offcanvas-body">
               <div>
                 {/* <form className="d-flex" role="search"> */}
-                <div className='d-flex mb-3'>
+                <div className="d-flex mb-3">
                   <input
                     className="form-control me-2"
                     type="search"
@@ -135,7 +144,7 @@ const SideDrawer = () => {
                     Go
                   </button>
                 </div>
-                
+                <ToastContainer />
                 {/* </form> */}
                 {/* if  loading show component else show results */}
                 {loading ? (
@@ -155,28 +164,32 @@ const SideDrawer = () => {
                   user={user}
                   handleFunction={()=>accessChat(user._id)}/>
               )))} */}
-                
               </div>
             </div>
           </div>
         </div>
-        <div className="d-flex justify-content-between px-5">
-          
-          <h4 style={{ fontSize: "x-large" }}>Chat Application</h4>
-          <Modal show={show} />
+        <div className=" d-flex justify-content-between0 px-2">
+          <h4 className="d-none d-sm-block " style={{ fontSize: "x-large" }}>
+            Chat Application
+          </h4>
         </div>
         <div className="d-flex justify-content-center">
-          <i className="fa-solid fa-bell p-1 pe-4" style={{fontSize:"larger"}} />
+          <i
+            className="d-none d-sm-block fa-solid fa-bell p-1 pe-4"
+            style={{ fontSize: "larger" }}
+          />
           {!notification.length && "No New Message"}
           {notification.map((notif) => (
-            <div  key={notif._id} 
+            <div
+              key={notif._id}
               onClick={() => {
-              setSelectedChat(notif.chat)
-              setNotification(notification.filter((n) => n !== notif))
-            }}>
+                setSelectedChat(notif.chat);
+                setNotification(notification.filter((n) => n !== notif));
+              }}
+            >
               {notif.chat.isGroupChat
-               ? `New Message in ${notif.chat.chatName}`
-               : `New Message from ${getSender(user, notif.chat.users)}` }
+                ? `New Message in ${notif.chat.chatName}`
+                : `New Message from ${getSender(user, notif.chat.users)}`}
             </div>
           ))}
         </div>
@@ -214,7 +227,7 @@ const SideDrawer = () => {
               </ProfileModal>
             </li> */}
             {/* <hr style={{ border: "1px solid black" }} /> */}
-            <li className='d-flex justify-content-center'>
+            <li className="d-flex justify-content-center">
               <button
                 onClick={logoutHandler}
                 type="button"
@@ -225,7 +238,6 @@ const SideDrawer = () => {
             </li>
           </ul>
         </div>
-        
       </div>
     </>
   );

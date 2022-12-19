@@ -3,6 +3,8 @@ import { ChatState } from "../../Context/ChatProvider";
 import axios from "axios";
 import UserListItem from "../UserAvatar/UserListItem";
 import UserBadgeItem from "../UserAvatar/UserBadgeItem";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const GroupChatModal = () => {
   const [groupChatName, setGroupChatName] = useState();
@@ -63,7 +65,10 @@ const GroupChatModal = () => {
       setChats([data, ...chats]);
       console.log("GroupChats", chats);
       // close the modal
-      //show toast -> New Group Chat Created!
+      const notify = () => {
+        toast("New Group Chat Created ");
+      };
+      notify();
       console.log("New Group Chat Created");
       
     } catch (error) {
@@ -147,7 +152,7 @@ const GroupChatModal = () => {
                   <div>loading</div>
                 ) : (
                   searchResult
-                    ?.slice(0, 6)
+                    ?.slice(0, 5)
                     .map((user) => (
                       <UserListItem
                         key={user._id}
@@ -157,6 +162,7 @@ const GroupChatModal = () => {
                     ))
                 )}
               </div>
+              <ToastContainer/>
               <div className="modal-footer">
                 <button
                   type="button"

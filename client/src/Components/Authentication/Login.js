@@ -1,17 +1,18 @@
 import axios from 'axios';
 //import { config } from 'dotenv';
 import React, {useState} from 'react'
-
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 import { useHistory } from 'react-router-dom';
 const Login = () => {
 
-  const [name, setName] = useState("dd");
+  const [name, setName] = useState("");
   const [email, setEmail] = useState();
   const [show, setShow] = useState(false);
   const [password, setPassword] = useState();
   const history = useHistory();
   
-  
+
 
   const handleShow = () => setShow(!show);
 
@@ -21,6 +22,10 @@ const Login = () => {
     if(!email || !password){
       // toast function
       console.log("Please fill all the fields");
+      const notify = () => {
+        toast("Please fill all the fields! ");
+      };
+      notify();
     }
     try{
       const config = {
@@ -35,7 +40,11 @@ const Login = () => {
         config 
       );
       console.log(JSON.stringify(data));
-      // toast
+        // const notify = () => {
+        //   toast("Login Successful! ");
+        // };
+        // notify();
+      
       console.log("Login Successful")
       localStorage.setItem("userInfo",JSON.stringify(data));
       //setloading false
@@ -44,6 +53,10 @@ const Login = () => {
       history.push("/chats")
     } catch(error){
       // toast and setloading -> false
+      const notify = () => {
+        toast("Error Occured! ");
+      };
+      notify();
       console.log("Error Occured")
     }
     
@@ -86,17 +99,25 @@ const Login = () => {
       </div>
 
       <div className="form-floating mb-3">
-        <button type="button" className="btn btn-primary" onClick={submitHandler}>
+        <button
+          type="button"
+          className="btn btn-primary"
+          onClick={submitHandler}
+        >
           Login
         </button>
       </div>
 
       <div className="form-floating mb-3">
-        <button type="button" className="btn btn-danger" onClick={submitHandler2}>
+        <button
+          type="button"
+          className="btn btn-danger"
+          onClick={submitHandler2}
+        >
           Get Guest User Credentials
         </button>
       </div>
-
+      <ToastContainer />
     </div>
   );
 }

@@ -2,6 +2,9 @@ import React, { useState } from 'react'
 import axios from 'axios';
 import { useHistory } from "react-router-dom"
 
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+
 const Signup = () => {
     const [name, setName] = useState("dd");
     const [email, setEmail] = useState();
@@ -18,7 +21,10 @@ const Signup = () => {
     const postDetails = (pics) => { 
         //setLoading(true)
         if(pics === undefined){
-            // run toast please add image
+            const notify = () => {
+              toast("Please add image! ");
+            };
+            notify();
             console.log("please add image")
         }
         if(pics.type === "image/jpeg" || pics.type === "image/png"){
@@ -44,11 +50,18 @@ const Signup = () => {
     const submitHandler = async() => {
         console.log("clicked on submit")
         if(!name || !email || !password || !confirmpassword){
-          // toast  please fill all fields
+          const notify = () => {
+            toast("Please fill all the fields! ");
+          };
+          notify();
           console.log("please fill all fields")
         }
         if(password !== confirmpassword){
           // toast function
+          const notify = () => {
+            toast("Password and Confirm Password Does n't match ");
+          };
+          notify();
           console.log("password and confirm does not match ")
         }
 
@@ -64,6 +77,10 @@ const Signup = () => {
           config
            );
            // toast function -> registration successful
+           const notify = () => {
+             toast("Registration Successful ");
+           };
+           notify();
            console.log("registration successful")
 
            localStorage.setItem('userInfo',JSON.stringify(data));
@@ -152,8 +169,7 @@ const Signup = () => {
           Sign Up
         </button>
       </div>
-      {console.log(name)}
-      {console.log("hi")}
+      <ToastContainer />
     </div>
   );
 }

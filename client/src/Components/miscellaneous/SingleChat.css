@@ -3,4 +3,5 @@
     flex-direction: column;
     overflow-y:scroll;
     scrollbar-width: none ;
+    height: 75vh;
 }

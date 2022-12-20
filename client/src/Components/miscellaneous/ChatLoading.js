@@ -5,9 +5,7 @@ const ChatLoading = () => {
     <div>
       
       <div className="vstack gap-3">
-        <div className="bg-light border">First item</div>
-        <div className="bg-light border">Second item</div>
-        <div className="bg-light border">Third item</div>
+        Search Users in Search Box
       </div>
     </div>
   );

@@ -202,7 +202,7 @@ const SideDrawer = () => {
           >
             <img
               src={user.pic}
-              className="rounded-circle m-1 me-3 ms-0"
+              className="d-none d-sm-block rounded-circle m-1 me-3 ms-0"
               style={{ height: "30px" }}
               alt={user.name}
               loading="lazy"

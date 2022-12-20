@@ -15,9 +15,8 @@ const Homepage = () => {
     if(user) history.push("/chats");
   }, [history]);
   return (
-    <div>
-      <div className="container" style={{ border: "2px solid red" }}>
-        Homepage
+    <div className='d-flex justify-content-center align-items-center' style={{ height: "100vh"}}>
+      <div className="container p-5 mt-5" style={{ border: "2px solid red" ,width:'600px'}}>
         <ul
           className="nav nav-pills mb-3 justify-content-center"
           id="pills-tab"

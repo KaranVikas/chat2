@@ -152,20 +152,28 @@ const Signup = () => {
         </button>
       </div>
 
-      <div className="form-floating mb-3">
+      <div
+        className="form-floating mb-3"
+        style={{ borderRadius: "0.35rem", border: "1px solid #d0d6dc" }}
+      >
         <input
           type="file"
           className="form-control"
           id="floatingInput"
           placeholder="name@example.com"
           onChange={(e) => postDetails(e.target.files[0])}
+          style={{ opacity: "0" }}
         />
 
         <label for="floatingInput">Upload Your Picture</label>
       </div>
 
       <div className="form-floating mb-3">
-        <button type="button" className="btn btn-primary" onClick={submitHandler}>
+        <button
+          type="button"
+          className="btn btn-primary"
+          onClick={submitHandler}
+        >
           Sign Up
         </button>
       </div>

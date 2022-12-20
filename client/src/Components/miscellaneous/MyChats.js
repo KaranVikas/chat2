@@ -36,8 +36,8 @@ const MyChats = ({ fetchAgain }) => {
   return (
     <>
       <div className="col-12 col-sm-4 p-1 pe-2" style={{ 
-      // to hide chat button
-      display:`${selectedChat ? "none" : "block" }`
+      // to hide mychat button
+      //display:`${selectedChat ? "none" : "block" }`
       }}>
         <div className="d-flex justify-content-between align-items-center ">
           <h3 style={{fontSize:"24px"}}>My Chats</h3>

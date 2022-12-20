@@ -1,0 +1,10 @@
+.responseLarge{
+    display: block;
+
+}
+.response{
+    display: none;
+  @media(min-width: 990px) {
+ display: block;
+}
+}

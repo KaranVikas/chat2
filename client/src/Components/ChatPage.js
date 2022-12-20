@@ -13,7 +13,7 @@ const ChatPage = () => {
     <div className="container-fluid" style={{ width: "100%" }}>
       {user && <SideDrawer />}
       <div
-        className=""
+        className="row"
         style={{
           display: "flex",
           width: "100%",

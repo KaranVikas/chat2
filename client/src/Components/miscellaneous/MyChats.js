@@ -4,6 +4,7 @@ import ChatLoading from "../miscellaneous/ChatLoading";
 import axios from "axios";
 import { getSender, getSenderPic } from "../../config/ChatLogics";
 import GroupChatModal from "./GroupChatModal";
+import "./MyChats.css"
 
 const MyChats = ({ fetchAgain }) => {
   const [loggedUser, setLoggedUser] = useState();
@@ -35,12 +36,18 @@ const MyChats = ({ fetchAgain }) => {
   }, [selectedChat]);
   return (
     <>
-      <div className="col-12 col-sm-4 p-1 pe-2" style={{ 
-      // to hide mychat button
-      //display:`${selectedChat ? "none" : "block" }`
-      }}>
+      <div
+        className={`col-12 col-lg-4 p-1 pe-2  ${
+          selectedChat ? "d-none d-lg-block" : "d-block"
+        }`}
+        // style={{
+        //   // to hide mychat button
+
+        //   display: `${selectedChat ? "none" : "block"}`,
+        // }}
+      >
         <div className="d-flex justify-content-between align-items-center ">
-          <h3 style={{fontSize:"24px"}}>My Chats</h3>
+          <h3 style={{ fontSize: "24px" }}>My Chats</h3>
           <GroupChatModal>
             {/* <button className="btn btn-light">New Group Chat +</button> */}
           </GroupChatModal>
@@ -50,7 +57,14 @@ const MyChats = ({ fetchAgain }) => {
 
         {chats ? (
           // issue make it scrollable
-          <div className="m-1 mt-3 p-2 " style={{ backgroundColor: "#f6f6f6", overflow:"scroll", height:"80vh" }}>
+          <div
+            className="m-1 mt-3 p-2 "
+            style={{
+              backgroundColor: "#f6f6f6",
+              overflow: "scroll",
+              height: "80vh",
+            }}
+          >
             {chats.map((chat) => (
               <div
                 className="m-1 p-2 d-flex"
@@ -60,20 +74,27 @@ const MyChats = ({ fetchAgain }) => {
                   console.log({ chat });
                 }}
                 style={{
-                  border:" ",
+                  border: " ",
                   cursor: "pointer",
-                  backgroundColor: `${selectedChat === chat ? "#f3f5f9" : "#E8E8E8"}`,
+                  backgroundColor: `${
+                    selectedChat === chat ? "#f3f5f9" : "#E8E8E8"
+                  }`,
                   color: `${selectedChat === chat ? "" : ""}`,
-                  borderLeft:`${selectedChat === chat ? "6px solid #3439cd" : ""}`,
-                  
+                  borderLeft: `${
+                    selectedChat === chat ? "6px solid #3439cd" : ""
+                  }`,
                 }}
                 key={chat._id}
               >
                 <div className="mx-2 p-1 me-4">
-                  <img src={!chat.isGroupChat
-                    ? getSenderPic(loggedUser, chat.users)
-                    : "https://medix21.com.au/wp-content/themes/medix21%20AU/images/avatar.png"
-                    } style={{width:"40px", height:"40px", objectFit:"fill"}}/>
+                  <img
+                    src={
+                      !chat.isGroupChat
+                        ? getSenderPic(loggedUser, chat.users)
+                        : "https://medix21.com.au/wp-content/themes/medix21%20AU/images/avatar.png"
+                    }
+                    style={{ width: "40px", height: "40px", objectFit: "fill" }}
+                  />
                 </div>
                 <div children="flex-column">
                   <div>
@@ -82,17 +103,14 @@ const MyChats = ({ fetchAgain }) => {
                       : chat.chatName}
                   </div>
                   <div>
-                    {
-                      chat.latestMessage && (
-                        <div>
-                          <b>{chat.latestMessage.sender.name} : </b>
-                            {chat.latestMessage.content.length > 50
-                              ? chat.latestMessage.content.substring(0, 51) + "..."
-                              : chat.latestMessage.content
-                            }
-                        </div>
-                      )
-                    }
+                    {chat.latestMessage && (
+                      <div>
+                        <b>{chat.latestMessage.sender.name} : </b>
+                        {chat.latestMessage.content.length > 50
+                          ? chat.latestMessage.content.substring(0, 51) + "..."
+                          : chat.latestMessage.content}
+                      </div>
+                    )}
                   </div>
                 </div>
               </div>

@@ -7,7 +7,7 @@ const ChatBox = ({ fetchAgain, setFetchAgain }) => {
   const { selectedChat } = ChatState();
   return (
     
-    <div className='container-fluid d-flex flex-column ps-4 ' >
+    <div className='col-12 col-lg-8 container-fluid d-flex flex-column ps-4 ' >
       
       
       <SingleChat fetchAgain={fetchAgain} setFetchAgain={setFetchAgain} />  

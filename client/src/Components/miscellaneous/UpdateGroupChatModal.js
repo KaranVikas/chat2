@@ -30,6 +30,7 @@ const UpdateGroupChatModal = ({ fetchAgain, setFetchAgain, fetchMessages  }) => 
       console.log("Only admins can add someone");
     }
     try {
+       
       const config = {
         headers: {
           Authorization: `Bearer ${user.token}`,
@@ -45,6 +46,7 @@ const UpdateGroupChatModal = ({ fetchAgain, setFetchAgain, fetchMessages  }) => 
         config
       );
       setSelectedChat(data);
+      console.log("User data to be added to group", data)
       setFetchAgain(!fetchAgain);
       setLoading(false);
     } catch (error) {

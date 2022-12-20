@@ -6,7 +6,7 @@ const UserListItem = ({user, handleFunction }) => {
   return (
     <div className='m-1' style={{backgroundColor:"#f6f6f6", cursor:"pointer"}} onClick={handleFunction} >
       <button
-        onClick={handleFunction}
+        //onClick={handleFunction}
         className="d-flex  p-1"
         style={{ width: "4rem"}}
       >

@@ -3,7 +3,7 @@ import React from "react";
 const ProfileModal = ({ user, children, show }) => {
   return (
     <div>
-      {show && (
+      
         <>
           
           <div
@@ -42,7 +42,7 @@ const ProfileModal = ({ user, children, show }) => {
             </div>
           </div>
         </>
-      )}
+    
       {children ? (
         <span>{children}</span>
       ) : (

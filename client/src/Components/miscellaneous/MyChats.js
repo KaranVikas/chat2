@@ -81,7 +81,7 @@ const MyChats = ({ fetchAgain }) => {
                   }`,
                   color: `${selectedChat === chat ? "" : ""}`,
                   borderLeft: `${
-                    selectedChat === chat ? "6px solid #3439cd" : ""
+                    selectedChat === chat ? "6px solid #fff037" : ""
                   }`,
                 }}
                 key={chat._id}

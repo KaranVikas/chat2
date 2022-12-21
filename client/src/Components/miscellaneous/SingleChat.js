@@ -1,12 +1,13 @@
 import React, { useState, useEffect } from "react";
 import { getSender, getSenderFull } from "../../config/ChatLogics";
 import { ChatState } from "../../Context/ChatProvider";
-import ProfileModal from "./ProfileModal";
+//import ProfileModal from "./ProfileModal";
 import UpdateGroupChatModal from "./UpdateGroupChatModal";
 import axios from "axios";
 import "./SingleChat.css";
 import ScrollableChat from "../ScrollableChat";
 import io from "socket.io-client";
+import CheckProfile from "./CheckProfile";
 
 const ENDPOINT = "http://localhost:5000";
 var socket, selectedChatCompare;
@@ -154,7 +155,9 @@ const SingleChat = ({ fetchAgain, setFetchAgain }) => {
             {!selectedChat.isGroupChat ? (
               <>
                 {getSender(user, selectedChat.users)}
-                <ProfileModal user={getSenderFull(user, selectedChat.users)} />
+                {/* <ProfileModal user={getSenderFull(user, selectedChat.users)} /> */}
+                <CheckProfile user={getSenderFull(user, selectedChat.users)}/>
+                {console.log("user -> ", getSenderFull(user, selectedChat.users))}
               </>
             ) : (
               <>

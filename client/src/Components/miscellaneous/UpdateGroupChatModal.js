@@ -230,7 +230,7 @@ const UpdateGroupChatModal = ({ fetchAgain, setFetchAgain, fetchMessages  }) => 
                 className="btn btn-danger"
                 onClick={() => handleRemove(user)}
               >
-                Save Group changes
+                Leave Group
               </button>
             </div>
           </div>

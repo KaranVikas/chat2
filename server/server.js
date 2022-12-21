@@ -7,7 +7,7 @@ const userRoutes = require("./routes/userRoutes");
 const chatRoutes = require("./routes/chatRoutes");
 const messageRoutes = require("./routes/messageRoutes")
 const router = require('./routes/chatRoutes')
-
+const path = require('path')
 
 const { notFound, errorHandler } = require('./middlewares/errorMiddleware')
 
@@ -39,6 +39,22 @@ app.use(express.json());
 app.use("/api/user", userRoutes);
 app.use("/api/chat", chatRoutes);
 app.use("/api/message",messageRoutes);
+
+//-----------Deployment------------------//
+
+const __dirname1 = path.resolve();
+if (process.env.NODE_ENV === 'production'){
+    // write our production code
+    app.use(express.static(path.join(__dirname1, "/client/build"))) 
+    // api call to get the elements { all elements}
+    app.get('*',(req,res) => {
+        res.sendFile(path.resolve(__dirname1, "client","build","index.html"))
+    })
+} else {
+    app.get("/",(req,res) => {
+        res.send("API is Running Successfully");
+    });
+}
 
 // adding errorhandling api if we go route that doesn't exist 
 app.use(notFound)

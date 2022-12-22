@@ -4,7 +4,7 @@ import { ChatState } from '../../Context/ChatProvider'
 const UserListItem = ({user, handleFunction }) => {
 
   return (
-    <div className='m-1' style={{backgroundColor:"#f6f6f6", cursor:"pointer"}} onClick={handleFunction} >
+    <div className='m-1' style={{backgroundColor:"white", cursor:"pointer"}} onClick={handleFunction} >
       <button
         //onClick={handleFunction}
         className="d-flex  p-1"

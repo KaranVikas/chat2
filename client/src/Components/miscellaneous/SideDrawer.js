@@ -97,11 +97,11 @@ const SideDrawer = () => {
           backgroundColor: "rgb(255, 240, 55)",
         }}
       >
-        <div className=" d-flex justify-content-between0 px-2">
+        <div className=" d-flex justify-content-between0 px-2 m-2">
           <svg
             style={{ }}
-            width="32"
-            height="32"
+            width="40"
+            height="40"
             viewBox="0 0 36 36"
             fill="none"
             xmlns="http://www.w3.org/2000/svg"
@@ -152,13 +152,14 @@ const SideDrawer = () => {
             />
           </svg>
 
-          <h4 className="d-none d-sm-block " style={{ fontSize: "x-large" }}>
+          <h4 className="d-none d-sm-block ms-3" style={{ fontSize: "32px" }}>
             DingDong
           </h4>
         </div>
+        
         <div>
           <button
-            className="btn btn-light m-1 "
+            className="btn btn-light btn-block m-1"
             type="button"
             data-bs-toggle="offcanvas"
             data-bs-target="#offcanvasExample"
@@ -254,17 +255,22 @@ const SideDrawer = () => {
         </div>
         <div className="dropdown">
           <button
-            className="btn btn-light dropdown-toggle d-flex align-items-center mt-2 "
+            className="btn btn-light dropdown-toggle d-flex align-items-center "
             type="button"
             data-bs-toggle="dropdown"
             aria-expanded="false"
+            style={{
+              border:"none",
+              background:"transparent"
+            }}
           >
             <img
               src={user.pic}
               className="d-none d-sm-block rounded-circle m-1 me-3 ms-0"
-              style={{ height: "30px" }}
+              style={{ height: "50px", width:"50px" }}
               alt={user.name}
               loading="lazy"
+
             />
             {user.name}
           </button>

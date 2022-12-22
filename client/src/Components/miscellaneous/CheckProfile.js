@@ -36,9 +36,10 @@ const CheckProfile = ({user}) => {
             >
               <img
                 src={user.pic}
-                className="p-1 border border-2"
+                className="p-1"
                 alt="..."
                 style={{
+                  border: "6px solid #fff037",
                   margin: "0x auto",
                   cursor: "pointer",
                   borderRadius: "50%",
@@ -59,8 +60,9 @@ const CheckProfile = ({user}) => {
                 <b style={{ fontSize: "20px" }}>About</b>
               </span>
               <div className="d-flex  ">
-                <span className="pe-1 m-2">I'm  a Product designer based in Malbourne</span>
-                
+                <span className="pe-1 m-2">
+                  I'm a Product designer based in Malbourne
+                </span>
               </div>
             </div>
           </div>

@@ -19,7 +19,8 @@ const ChatPage = () => {
           width: "100%",
           height: "90vh",
           justifyContent: "space-between",
-          padding: "20px"
+          paddingTop: "10px",
+          paddingLeft: "10px"
         
         }}
       >

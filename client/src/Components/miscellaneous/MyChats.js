@@ -37,7 +37,7 @@ const MyChats = ({ fetchAgain }) => {
   return (
     <>
       <div
-        className={`col-12 col-lg-4 p-1 pe-2  ${
+        className={`col-12 col-lg-4 p-1 pe-2 ${
           selectedChat ? "d-none d-lg-block" : "d-block"
         }`}
         // style={{
@@ -47,7 +47,7 @@ const MyChats = ({ fetchAgain }) => {
         // }}
       >
         <div className="d-flex justify-content-between align-items-center ">
-          <h3 style={{ fontSize: "24px" }}>My Chats</h3>
+          <h3 className="ms-3 p-1" style={{ fontSize: "24px" }}>My Chats</h3>
           <GroupChatModal>
             {/* <button className="btn btn-light">New Group Chat +</button> */}
           </GroupChatModal>
@@ -58,9 +58,10 @@ const MyChats = ({ fetchAgain }) => {
         {chats ? (
           // issue make it scrollable
           <div
-            className="m-1 mt-3 p-2 "
+            className="ms-3 mt-3 "
             style={{
-              backgroundColor: "#f6f6f6",
+              backgroundColor: "",
+
               overflow: "scroll",
               height: "80vh",
             }}
@@ -76,6 +77,7 @@ const MyChats = ({ fetchAgain }) => {
                 style={{
                   border: " ",
                   cursor: "pointer",
+                  borderRadius: "1rem",
                   backgroundColor: `${
                     selectedChat === chat ? "#f3f5f9" : "#E8E8E8"
                   }`,

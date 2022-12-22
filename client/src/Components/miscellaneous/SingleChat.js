@@ -156,8 +156,11 @@ const SingleChat = ({ fetchAgain, setFetchAgain }) => {
               <>
                 {getSender(user, selectedChat.users)}
                 {/* <ProfileModal user={getSenderFull(user, selectedChat.users)} /> */}
-                <CheckProfile user={getSenderFull(user, selectedChat.users)}/>
-                {console.log("user -> ", getSenderFull(user, selectedChat.users))}
+                <CheckProfile user={getSenderFull(user, selectedChat.users)} />
+                {console.log(
+                  "user -> ",
+                  getSenderFull(user, selectedChat.users)
+                )}
               </>
             ) : (
               <>
@@ -174,7 +177,7 @@ const SingleChat = ({ fetchAgain, setFetchAgain }) => {
           </h5>
           <div
             className=" container-fluid mt-2 h-100 d-flex flex-column justify-content-end"
-            style={{ backgroundColor: "#f6f6f6" }}
+            style={{ backgroundColor: "#f3f5f9" }}
           >
             Message Space
             {loading ? (
@@ -201,9 +204,9 @@ const SingleChat = ({ fetchAgain, setFetchAgain }) => {
       ) : (
         <div
           className="d-sm-flex d-none d-flex justify-content-center align-items-center h-100"
-          style={{ border: "1px solid black" }}
+          style={{ border: "" }}
         >
-          <h5> Click on user to start Chatting</h5>
+          <h5> Please Select on chat to start chatting</h5>
         </div>
       )}
     </>

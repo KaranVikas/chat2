@@ -8,7 +8,7 @@ const UserBadgeItem = ({user, handleFunction }) => {
           style={{ cursor: "pointer" }}
           onClick={handleFunction}
         >
-          <button className="btn btn-danger">
+          <button className="btn btn-warning">
             {user.name} <i className="fas fa-xmark"></i>
           </button>
         </div>

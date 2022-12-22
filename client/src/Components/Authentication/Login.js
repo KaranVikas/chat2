@@ -93,15 +93,15 @@ const Login = () => {
           />
           <label for="floatingPassword">Password</label>
         </div>
-        <button type="button" className="btn btn-link" onClick={handleShow}>
+        <button type="button" className="btn " onClick={handleShow}>
           {show ? "Hide" : "Show"}
         </button>
       </div>
 
       <div className="form-floating mb-3">
         <button
-          type="button"
-          className="btn btn-primary"
+          type="button "
+          className="btn btn-warning btn-block"
           onClick={submitHandler}
         >
           Login
@@ -111,7 +111,7 @@ const Login = () => {
       <div className="form-floating mb-3">
         <button
           type="button"
-          className="btn btn-danger"
+          className="btn btn-outline-danger"
           onClick={submitHandler2}
         >
           Get Guest User Credentials

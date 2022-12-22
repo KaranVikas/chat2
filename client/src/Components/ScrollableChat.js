@@ -19,9 +19,10 @@ const ScrollableChat = ({messages}) => {
                   src={m.sender.pic}
                   alt={m.sender.name}
                   style={{
-                    width: "30px",
-                    height: "30px",
+                    width: "35px",
+                    height: "35px",
                     borderRadius: "25px",
+                    marginRight:"7px"
                   }}
                 />
               )}

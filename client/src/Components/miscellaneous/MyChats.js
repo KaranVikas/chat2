@@ -68,7 +68,7 @@ const MyChats = ({ fetchAgain }) => {
           >
             {chats.map((chat) => (
               <div
-                className="m-1 p-2 d-flex"
+                className="m-2 m-sm-1 p-2 d-flex"
                 onClick={() => {
                   setSelectedChat(chat);
                   console.log({ selectedChat });

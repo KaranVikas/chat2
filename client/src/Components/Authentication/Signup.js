@@ -51,7 +51,7 @@ const Signup = () => {
         console.log("clicked on submit")
         if(!name || !email || !password || !confirmpassword){
           const notify = () => {
-            toast("Please fill all the fields! ");
+            toast.warn("Please fill all the fields! ");
           };
           notify();
           console.log("please fill all fields")
@@ -59,7 +59,7 @@ const Signup = () => {
         if(password !== confirmpassword){
           // toast function
           const notify = () => {
-            toast("Password and Confirm Password Does n't match ");
+            toast.warn("Password and Confirm Password Does n't match ");
           };
           notify();
           console.log("password and confirm does not match ")

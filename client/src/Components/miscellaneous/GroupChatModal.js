@@ -90,15 +90,18 @@ const GroupChatModal = () => {
   };
 
   return (
-    // 
+    //
     <div>
       <div>
         <button
           type="button"
-          className="btn btn-light me-1"
+          className="btn btn-outline-warning me-1"
           data-bs-toggle="modal"
           data-bs-target="#exampleModal"
-          style={{border:"1px solid black"}}
+          style={{
+            //border: "none",
+            //backgroundColor: "#fff037",
+          }}
         >
           Create Group Chat +
         </button>
@@ -124,7 +127,6 @@ const GroupChatModal = () => {
                 ></button>
               </div>
               <div className="modal-body">
-                
                 <input
                   className="form-control me-2 mb-2"
                   type="text"
@@ -162,18 +164,18 @@ const GroupChatModal = () => {
                     ))
                 )}
               </div>
-              <ToastContainer/>
+              <ToastContainer />
               <div className="modal-footer">
                 <button
                   type="button"
-                  className="btn btn-secondary"
+                  className="btn btn-outline-dark"
                   data-bs-dismiss="modal"
                 >
                   Close
                 </button>
                 <button
                   type="button"
-                  className="btn btn-primary"
+                  className="btn btn-warning"
                   onClick={handleSubmit}
                   data-bs-dismiss="modal"
                 >

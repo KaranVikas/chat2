@@ -37,7 +37,7 @@ const SideDrawer = () => {
     if(!search){
       // toast function to throw error
       const notify = () => {
-        toast("Please Enter something ");
+        toast.warn("Please Enter something ");
       };
       notify();
       
@@ -90,16 +90,16 @@ const SideDrawer = () => {
   return (
     <>
       <div
-        className="d-flex container-fluid justify-content-between align-items-center"
+        className="d-flex container-fluid  align-items-center justify-content-between"
         style={{
           border: "",
           boxShadow: "rgb(0 0 0 / 8%) 0px 4px 20px",
           backgroundColor: "rgb(255, 240, 55)",
         }}
       >
-        <div className=" d-flex justify-content-between0 px-2 m-2">
+        <div className=" d-flex col-sm-4 justify-content-between0 px-2 m-2">
           <svg
-            style={{ }}
+            style={{}}
             width="40"
             height="40"
             viewBox="0 0 36 36"
@@ -156,152 +156,158 @@ const SideDrawer = () => {
             DingDong
           </h4>
         </div>
-        
-        <div>
-          <button
-            className="btn btn-light btn-block m-1"
-            type="button"
-            data-bs-toggle="offcanvas"
-            data-bs-target="#offcanvasExample"
-            aria-controls="offcanvasExample"
-          >
-            <i className="fa-solid fa-search p-1 px-2 pe-3" />
-            Search
-          </button>
 
-          <div
-            className="offcanvas offcanvas-start d-flex justify-content-between"
-            tabIndex="-1"
-            id="offcanvasExample"
-            aria-labelledby="offcanvasExampleLabel"
-          >
-            <div className="offcanvas-header">
-              <h5 className="offcanvas-title" id="offcanvasExampleLabel">
-                Search Users
-              </h5>
-              <button
-                type="button"
-                className="btn-close text-reset"
-                data-bs-dismiss="offcanvas"
-                aria-label="Close"
-              ></button>
-            </div>
-            <hr />
-            <div className="offcanvas-body">
-              <div>
-                {/* <form className="d-flex" role="search"> */}
-                <div className="d-flex mb-3">
-                  <input
-                    className="form-control me-2"
-                    type="search"
-                    placeholder="Search by name or email"
-                    aria-label="Search"
-                    value={search}
-                    onChange={(e) => setSearch(e.target.value)}
-                  />
-                  <button
-                    className="btn btn-outline-success"
-                    type="submit"
-                    onClick={handleSearch}
-                    onChange={(e) => e.preventDefault()}
-                  >
-                    Go
-                  </button>
+        <div className="d-flex col-8 justify-content-between align-items-center ms-2">
+          <div className="d-flex justify-content-center">
+            <i
+              className="d-none d-sm-block fa-solid fa-bell p-1 pe-2"
+              style={{ fontSize: "larger", alignSelf:"center" }}
+            />
+            <div className="d-none d-sm-block">
+              {!notification.length && "No New Message"}
+              {notification.map((notif) => (
+                <div
+                  className=""
+                  key={notif._id}
+                  onClick={() => {
+                    setSelectedChat(notif.chat);
+                    setNotification(notification.filter((n) => n !== notif));
+                  }}
+                >
+                  {notif.chat.isGroupChat
+                    ? `New Message in ${notif.chat.chatName}`
+                    : `New Message from ${getSender(user, notif.chat.users)}`}
                 </div>
-                <ToastContainer />
-                {/* </form> */}
-                {/* if  loading show component else show results */}
-                {loading ? (
-                  <ChatLoading />
-                ) : (
-                  searchResult?.map((user) => (
-                    <UserListItem
-                      key={user._id}
-                      user={user}
-                      handleFunction={() => accessChat(user._id)}
+              ))}
+            </div>
+          </div>
+
+          <div className="col-5">
+            <button
+              className="d-flex justify-content-between btn btn-light btn-block  m-1 w-100"
+              type="button"
+              data-bs-toggle="offcanvas"
+              data-bs-target="#offcanvasExample"
+              aria-controls="offcanvasExample"
+            >
+              Search
+              <i className="fa-solid fa-search p-1 px-2 pe-3" />
+            </button>
+
+            <div
+              className="offcanvas offcanvas-start d-flex justify-content-between"
+              tabIndex="-1"
+              id="offcanvasExample"
+              aria-labelledby="offcanvasExampleLabel"
+            >
+              <div className="offcanvas-header">
+                <h5 className="offcanvas-title" id="offcanvasExampleLabel">
+                  Search Users
+                </h5>
+                <button
+                  type="button"
+                  className="btn-close text-reset"
+                  data-bs-dismiss="offcanvas"
+                  aria-label="Close"
+                ></button>
+              </div>
+              <hr />
+              <div className="offcanvas-body">
+                <div>
+                  {/* <form className="d-flex" role="search"> */}
+                  <div className="d-flex mb-3">
+                    <input
+                      className="form-control me-2"
+                      type="search"
+                      placeholder="Search by name or email"
+                      aria-label="Search"
+                      value={search}
+                      onChange={(e) => setSearch(e.target.value)}
                     />
-                  ))
-                )}
-                {/* {(searchResult?.map(user =>(
-                <UserListItem
-                  key={user._id}
-                  user={user}
-                  handleFunction={()=>accessChat(user._id)}/>
-              )))} */}
+                    <button
+                      className="btn btn-outline-warning"
+                      type="submit"
+                      onClick={handleSearch}
+                      onChange={(e) => e.preventDefault()}
+                    >
+                      Go
+                    </button>
+                  </div>
+                  <ToastContainer />
+                  {/* </form> */}
+                  {/* if  loading show component else show results */}
+                  {loading ? (
+                    <ChatLoading />
+                  ) : (
+                    searchResult?.map((user) => (
+                      <UserListItem
+                        key={user._id}
+                        user={user}
+                        handleFunction={() => accessChat(user._id)}
+                      />
+                    ))
+                  )}
+                  {/* {(searchResult?.map(user =>(
+                  <UserListItem
+                    key={user._id}
+                    user={user}
+                    handleFunction={()=>accessChat(user._id)}/>
+                )))} */}
+                </div>
               </div>
             </div>
           </div>
-        </div>
 
-        <div className="d-flex justify-content-center">
-          <i
-            className="d-none d-sm-block fa-solid fa-bell p-1 pe-4"
-            style={{ fontSize: "larger" }}
-          />
-          {!notification.length && "No New Message"}
-          {notification.map((notif) => (
-            <div
-              key={notif._id}
-              onClick={() => {
-                setSelectedChat(notif.chat);
-                setNotification(notification.filter((n) => n !== notif));
+          <div className="dropdown me-3">
+            <button
+              className="btn btn-light dropdown-toggle d-flex align-items-center "
+              type="button"
+              data-bs-toggle="dropdown"
+              aria-expanded="false"
+              style={{
+                border: "none",
+                background: "transparent",
               }}
             >
-              {notif.chat.isGroupChat
-                ? `New Message in ${notif.chat.chatName}`
-                : `New Message from ${getSender(user, notif.chat.users)}`}
-            </div>
-          ))}
-        </div>
-        <div className="dropdown">
-          <button
-            className="btn btn-light dropdown-toggle d-flex align-items-center "
-            type="button"
-            data-bs-toggle="dropdown"
-            aria-expanded="false"
-            style={{
-              border:"none",
-              background:"transparent"
-            }}
-          >
-            <img
-              src={user.pic}
-              className="d-none d-sm-block rounded-circle m-1 me-3 ms-0"
-              style={{ height: "50px", width:"50px" }}
-              alt={user.name}
-              loading="lazy"
-
-            />
-            {user.name}
-          </button>
-          <ul
-            className="dropdown-menu dropdown-menu-dark"
-            style={{ backgroundColor: "#f8f9fa", minWidth: "8rem" }}
-          >
-            {/* <li className="mb-1">
-              <ProfileModal user={user} show={show}>
+              <img
+                src={user.pic}
+                className="d-none d-sm-block rounded-circle m-1 me-3 ms-0"
+                style={{ height: "50px", width: "50px" }}
+                alt={user.name}
+                loading="lazy"
+              />
+              {user.name}
+            </button>
+            <ul
+              className="dropdown-menu dropdown-menu-dark"
+              style={{ backgroundColor: "#f8f9fa", minWidth: "8rem" }}
+            >
+              {/* <li className="mb-1">
+                <ProfileModal user={user} show={show}>
+                  <button
+                    onClick={showModal}
+                    type="button"
+                    className="btn btn-light"
+                    data-bs-toggle="modal"
+                    data-bs-target="#staticBackdrop"
+                  >
+                    My Profile 2
+                  </button>
+                </ProfileModal>
+              </li> */}
+              {/* <hr style={{ border: "1px solid black" }} /> */}
+              <li className="d-flex justify-content-center">
                 <button
-                  onClick={showModal}
+                  onClick={logoutHandler}
                   type="button"
                   className="btn btn-light"
-                  data-bs-toggle="modal"
-                  data-bs-target="#staticBackdrop"
                 >
-                  My Profile 2
+                  Logout
                 </button>
-              </ProfileModal>
-            </li> */}
-            {/* <hr style={{ border: "1px solid black" }} /> */}
-            <li className="d-flex justify-content-center">
-              <button
-                onClick={logoutHandler}
-                type="button"
-                className="btn btn-light"
-              >
-                Logout
-              </button>
-            </li>
-          </ul>
+              </li>
+              
+            </ul>
+          </div>
         </div>
       </div>
     </>

@@ -95,7 +95,12 @@ const UpdateGroupChatModal = ({ fetchAgain, setFetchAgain, fetchMessages  }) => 
   };
 
   const handleRename = async () => {
-    if (!groupChatName) return;
+    if (!groupChatName) {
+      const notify = () => {
+        toast.warn("Please Enter something ");
+      };
+      notify();
+    };
     try {
       //setRenameloading(true)
 
@@ -194,7 +199,7 @@ const UpdateGroupChatModal = ({ fetchAgain, setFetchAgain, fetchMessages  }) => 
                 value={groupChatName}
                 onChange={(e) => setGroupChatName(e.target.value)}
               />
-              <button className="btn btn-success" onClick={handleRename}>
+              <button className="btn btn-outline-success" onClick={handleRename}>
                 Update
               </button>
             </div>
@@ -220,14 +225,14 @@ const UpdateGroupChatModal = ({ fetchAgain, setFetchAgain, fetchMessages  }) => 
             <div className="modal-footer">
               <button
                 type="button"
-                className="btn btn-secondary"
+                className="btn btn-outline-dark"
                 data-bs-dismiss="modal"
               >
                 Close
               </button>
               <button
                 type="button"
-                className="btn btn-danger"
+                className="btn btn-outline-danger"
                 onClick={() => handleRemove(user)}
               >
                 Leave Group

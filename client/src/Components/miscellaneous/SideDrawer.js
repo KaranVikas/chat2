@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import { useHistory } from 'react-router-dom';
 import { ChatState } from '../../Context/ChatProvider';
 import ChatLoading from './ChatLoading';
-
+import Profile from './Profile';
 import ProfileModal from './ProfileModal';
 import UserListItem from '../UserAvatar/UserListItem'
 import axios from 'axios';
@@ -31,6 +31,8 @@ const SideDrawer = () => {
     console.log("userinfo deleted")
     history.push("/");
   };
+
+  
 
   const handleSearch = async() => {
     console.log(search)
@@ -161,7 +163,7 @@ const SideDrawer = () => {
           <div className="d-flex justify-content-center">
             <i
               className="d-none d-sm-block fa-solid fa-bell p-1 pe-2"
-              style={{ fontSize: "larger", alignSelf:"center" }}
+              style={{ fontSize: "larger", alignSelf: "center" }}
             />
             <div className="d-none d-sm-block">
               {!notification.length && "No New Message"}
@@ -258,7 +260,10 @@ const SideDrawer = () => {
             </div>
           </div>
 
-          <div className="dropdown me-3">
+          {/* <Profile /> */}
+
+          <div className="d-flex dropdown me-3">
+            <Profile />
             <button
               className="btn btn-light dropdown-toggle d-flex align-items-center "
               type="button"
@@ -269,13 +274,13 @@ const SideDrawer = () => {
                 background: "transparent",
               }}
             >
-              <img
+              {/* <img
                 src={user.pic}
                 className="d-none d-sm-block rounded-circle m-1 me-3 ms-0"
                 style={{ height: "50px", width: "50px" }}
                 alt={user.name}
                 loading="lazy"
-              />
+              /> */}
               {user.name}
             </button>
             <ul
@@ -296,6 +301,7 @@ const SideDrawer = () => {
                 </ProfileModal>
               </li> */}
               {/* <hr style={{ border: "1px solid black" }} /> */}
+              <li className="d-flex justify-content-center"></li>
               <li className="d-flex justify-content-center">
                 <button
                   onClick={logoutHandler}
@@ -305,7 +311,6 @@ const SideDrawer = () => {
                   Logout
                 </button>
               </li>
-              
             </ul>
           </div>
         </div>

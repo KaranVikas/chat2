@@ -29,31 +29,35 @@ const UpdateGroupChatModal = ({ fetchAgain, setFetchAgain, fetchMessages  }) => 
       //toast only admins can add someone
       console.log("Only admins can add someone");
     }
-    try {
-       
-      const config = {
-        headers: {
-          Authorization: `Bearer ${user.token}`,
-        },
-      };
 
-      const { data } = await axios.put(
-        "/api/chat/groupadd",
-        {
-          chatId: selectedChat._id,
-          userId: user1._id,
-        },
-        config
-      );
-      setSelectedChat(data);
-      console.log("User data to be added to group", data)
-      setFetchAgain(!fetchAgain);
-      setLoading(false);
-    } catch (error) {
-      // toast Error Occured
-      console.log("Error Occured");
-      //setLoading(false)
+    if (selectedChat.users.find((u) => u._id !== user1._id)) {
+      //toast not in group
+      try {
+        const config = {
+          headers: {
+            Authorization: `Bearer ${user.token}`,
+          },
+        };
+
+        const { data } = await axios.put(
+          "/api/chat/groupadd",
+          {
+            chatId: selectedChat._id,
+            userId: user1._id,
+          },
+          config
+        );
+        setSelectedChat(data);
+        console.log("User data to be added to group", data);
+        setFetchAgain(!fetchAgain);
+        setLoading(false);
+      } catch (error) {
+        // toast Error Occured
+        console.log("Error Occured");
+        //setLoading(false)
+      }
     }
+    
   };
 
   const handleRemove = async (user1) => {

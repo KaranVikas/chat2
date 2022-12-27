@@ -99,7 +99,7 @@ const SideDrawer = () => {
           backgroundColor: "rgb(255, 240, 55)",
         }}
       >
-        <div className=" d-flex col-sm-4 justify-content-between px-2 m-2">
+        <div className=" d-flex col-1 col-lg-4 justify-content-between pe-lg-3">
           <svg
             style={{}}
             width="40"
@@ -154,12 +154,12 @@ const SideDrawer = () => {
             />
           </svg>
 
-          <h4 className="d-none d-sm-block ms-3" style={{ fontSize: "32px" }}>
+          <h4 className="d-none d-lg-block" style={{ fontSize: "32px" }}>
             DingDong
           </h4>
         </div>
 
-        <div className="d-flex col-8 justify-content-between align-items-center ms-2">
+        <div className="d-flex col-10 col-lg-8 justify-content-between  align-items-center ms-2">
           <div className="d-flex justify-content-center">
             <i
               className="d-none d-sm-block fa-solid fa-bell p-1 pe-2"
@@ -262,7 +262,7 @@ const SideDrawer = () => {
 
           {/* <Profile /> */}
 
-          <div className="d-flex dropdown me-3">
+          <div className="d-flex dropdown">
             <Profile />
             <button
               className="btn btn-light dropdown-toggle d-flex align-items-center "

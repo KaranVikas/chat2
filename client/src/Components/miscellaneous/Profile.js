@@ -16,7 +16,7 @@ const Profile = () => {
       >
         <img
           src={user.pic}
-          className="d-none d-sm-block rounded-circle m-1 me-3 ms-0"
+          className=" rounded-circle m-1 me-3 ms-0"
           style={{ height: "50px", width: "50px" }}
           alt={user.name}
           loading="lazy"

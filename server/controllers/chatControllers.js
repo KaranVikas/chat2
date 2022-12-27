@@ -134,38 +134,86 @@ const renameGroup = asyncHandler(async (req, res) => {
 
 const addToGroup = asyncHandler(async (req, res) => {
   const { chatId, userId } = req.body;
-    console.log("userID", userId)
-    console.log("chatID", chatId)
-    // console.log("Display chat", res.Chat)
-  var isUserExist = await Chat.findOne({ _id:  chatId })
-    console.log(
-      "is User Exist",
-      isUserExist.users.map((a) => a , chatId)
-    );
-    // if(!isUserExist){
-    //     res.json("User not exist")
-    //     res.json(added)
-    // }
+  console.log("userID", userId);
+  console.log("chatID", chatId);
+  // console.log("Display chat", res.Chat)
+  var chatReq = await Chat.findOne({ _id: chatId });
+ 
+    const check = await chatReq.users.find((u) => `${u._id}` === `${userId}`);
+    if (check){
+      console.log("CHECK", check);
+    } else{
+      console.log("not found");
+      
+      const added = await Chat.findByIdAndUpdate(
+        chatId,
+        {
+          $push: {users:userId}
+        },
+        {
+          new: true,
+        }
+      )
+      .populate("users","-password")
+      .populate("groupAdmin","-password");
 
-//    const added = await Chat.findByIdAndUpdate(
-//      chatId,
-//      {
-//        $push: { users: userId },
-//      },
-//      {
-//        new: true,
-//      }
-//    )
-//      .populate("users", "-password")
-//      .populate("groupAdmin", "-password");
+      // will not work as it will check condition first
+      if (!added) {
+        console.log("not added")
+        res.status(404);
+        throw new Error("Users not added");
+        
+      } else {
+        res.json(added);
+        console.log("added", added)
+      }
+    
+    }
 
-//   if (!added) {
-//     res.status(404);
-//     throw new Error("Chat Not Found");
-//   } else {
-//     res.json(added);
-//   }
- res.json({"asdf":res});
+  res.send(" already added ");
+ 
+
+  // if (chatReq.users.find((u) => u._id !== `new ObjectId("${userId}")` )) {
+  //   console.log("not find see" , userId )
+  //   console.log(`new1 ObjectId("${userId}")`)
+  //   // console.log("U_id", u)
+  // }
+  // const Chatting = Chat.find({
+  //   users: { $elemMatch: { _id: "638ef29d002b84f8498dde64" } },
+  // });
+
+  // var userReq = chatReq.users.findOne({ _id: userId });
+  // console.log("check", value);
+  // var inGroup = await Chat.find({
+  //   isGroupChat: true,
+  //   $expr : [
+  //     {users: {elemMatch: {$eq: userId}}}
+  //   ]
+  // })
+  // console.log("in Group", inGroup)
+  // if(!isUserExist){
+  //     res.json("User not exist")
+  //     res.json(added)
+  // }
+
+  //    const added = await Chat.findByIdAndUpdate(
+  //      chatId,
+  //      {
+  //        $push: { users: userId },
+  //      },
+  //      {
+  //        new: true,
+  //      }
+  //    )
+  //      .populate("users", "-password")
+  //      .populate("groupAdmin", "-password");
+
+  // if (isUserExist) {
+  // res.status(404);
+  // throw new Error("Chat Not Found");
+  // } else {
+  //   res.json("bye");
+  // }
 });
 
 const removeFromGroup = asyncHandler(async (req, res) => {

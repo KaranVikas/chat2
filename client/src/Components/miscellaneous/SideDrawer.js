@@ -99,7 +99,7 @@ const SideDrawer = () => {
           backgroundColor: "rgb(255, 240, 55)",
         }}
       >
-        <div className=" d-flex col-sm-4 justify-content-between0 px-2 m-2">
+        <div className=" d-flex col-sm-4 justify-content-between px-2 m-2">
           <svg
             style={{}}
             width="40"

@@ -139,6 +139,35 @@ const SingleChat = ({ fetchAgain, setFetchAgain }) => {
     }
   };
 
+  const sendMessageButton = async (event) => {
+    try {
+      const config = {
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${user.token}`,
+        },
+      };
+      setNewMessage("");
+      const { data } = await axios.post(
+        "/api/message",
+        {
+          content: newMessage,
+          chatId: selectedChat._id,
+        },
+        config
+      );
+      console.log(data);
+
+      socket.emit("new message", data);
+      console.log(data);
+      //setNewMessage([...messages, data]);
+      setMessages([...messages, data]);
+    } catch (error) {
+      // toast -> Failed to send the message
+      console.log("Failed to send the message");
+    }
+  };
+
   const typingHandler = (e) => {
     setNewMessage(e.target.value);
 
@@ -189,7 +218,7 @@ const SingleChat = ({ fetchAgain, setFetchAgain }) => {
               </div>
             )}
             <div>
-              <div className=" mb-3 mt-2" onKeyDown={sendMessage}>
+              <div className="d-flex mb-3 mt-2" onKeyDown={sendMessage}>
                 <input
                   type="text"
                   className="form-control me-2"
@@ -197,6 +226,13 @@ const SingleChat = ({ fetchAgain, setFetchAgain }) => {
                   onChange={typingHandler}
                   value={newMessage}
                 />
+                <button
+                  type="submit"
+                  className="btn btn-outline-warning"
+                  onClick={sendMessageButton}
+                >
+                  send
+                </button>
               </div>
             </div>
           </div>

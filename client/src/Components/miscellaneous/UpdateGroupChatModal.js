@@ -24,14 +24,15 @@ const UpdateGroupChatModal = ({ fetchAgain, setFetchAgain, fetchMessages  }) => 
       };
       notify();
       console.log("user already in group!");
+      return;
     }
     if (selectedChat.groupAdmin._id !== user._id) {
       //toast only admins can add someone
       console.log("Only admins can add someone");
     }
 
-    if (selectedChat.users.find((u) => u._id !== user1._id)) {
-      //toast not in group
+    // if (selectedChat.users.find((u) => u._id !== user1._id)) {
+    //   //toast not in group
       try {
         const config = {
           headers: {
@@ -56,7 +57,7 @@ const UpdateGroupChatModal = ({ fetchAgain, setFetchAgain, fetchMessages  }) => 
         console.log("Error Occured");
         //setLoading(false)
       }
-    }
+    // }
     
   };
 

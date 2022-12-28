@@ -1,22 +1,35 @@
-import React, { useEffect } from 'react'
-import { useHistory } from 'react-router-dom';
-import Login from './Authentication/Login';
-import Signup from './Authentication/Signup';
-
-
+import React, { useEffect } from "react";
+import { useHistory } from "react-router-dom";
+import Login from "./Authentication/Login";
+import Signup from "./Authentication/Signup";
 
 const Homepage = () => {
-
   const history = useHistory();
-  
-  useEffect(()=>{
+
+  useEffect(() => {
     const user = JSON.parse(localStorage.getItem("userInfo"));
 
-    if(user) history.push("/chats");
+    if (user) history.push("/chats");
   }, [history]);
   return (
-    <div className='d-flex justify-content-center align-items-center' style={{ height: "100vh"}}>
-      <div className="container p-5 mt-5" style={{ border: "2px solid red" ,width:'600px'}}>
+    <div
+      className="d-flex justify-content-center align-items-center"
+      style={{ height: "100vh", backgroundColor: "#fafafa" }}
+    >
+      <div
+        className="container p-5 mt-5"
+        style={{
+          border: "1px solid Gray",
+          width: "600px",
+          backgroundColor: "#ffffff",
+        }}
+      >
+        <h3
+          className="m-3 p-3 mb-4"
+          style={{ fontSize: "35px", fontFamily: "cursive" }}
+        >
+          Ding Dong
+        </h3>
         <ul
           className="nav nav-pills mb-3 justify-content-center"
           id="pills-tab"
@@ -25,7 +38,7 @@ const Homepage = () => {
           <li className="nav-item" role="presentation">
             <button
               //style={{ backgroundColor: "#3339cd" }}
-              className="nav-link active"
+              className=" nav-link active"
               id="pills-home-tab"
               data-bs-toggle="pill"
               data-bs-target="#pills-home"
@@ -75,6 +88,6 @@ const Homepage = () => {
       </div>
     </div>
   );
-}
+};
 
-export default Homepage
+export default Homepage;

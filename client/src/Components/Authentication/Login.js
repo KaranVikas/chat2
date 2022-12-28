@@ -1,25 +1,21 @@
-import axios from 'axios';
+import axios from "axios";
 //import { config } from 'dotenv';
-import React, {useState} from 'react'
+import React, { useState } from "react";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import { useHistory } from 'react-router-dom';
+import { useHistory } from "react-router-dom";
 const Login = () => {
-
   const [name, setName] = useState("");
   const [email, setEmail] = useState();
   const [show, setShow] = useState(false);
   const [password, setPassword] = useState();
   const history = useHistory();
-  
-
 
   const handleShow = () => setShow(!show);
 
-  
-  const submitHandler = async() => {
+  const submitHandler = async () => {
     //setLoading
-    if(!email || !password){
+    if (!email || !password) {
       // toast function
       console.log("Please fill all the fields");
       const notify = () => {
@@ -27,7 +23,7 @@ const Login = () => {
       };
       notify();
     }
-    try{
+    try {
       const config = {
         headers: {
           "Content-type": "application/json",
@@ -37,35 +33,37 @@ const Login = () => {
       const { data } = await axios.post(
         "/api/user/login",
         { email, password },
-        config 
+        config
       );
       console.log(JSON.stringify(data));
-        // const notify = () => {
-        //   toast("Login Successful! ");
-        // };
-        // notify();
-      
-      console.log("Login Successful")
-      localStorage.setItem("userInfo",JSON.stringify(data));
+      // const notify = () => {
+      //   toast("Login Successful! ");
+      // };
+      // notify();
+
+      console.log("Login Successful");
+
+      localStorage.setItem("userInfo", JSON.stringify(data));
       //setloading false
       // if successful login push to chat page
       //  use hi
-      history.push("/chats")
-    } catch(error){
+      window.location.reload();
+
+      history.push("/chats");
+    } catch (error) {
       // toast and setloading -> false
       const notify = () => {
         toast("Error Occured! ");
       };
       notify();
-      console.log("Error Occured")
+      console.log("Error Occured");
     }
-    
   };
 
   const submitHandler2 = () => {
     setEmail("Guest@gmail.com");
     setPassword("Guest12");
-  }
+  };
 
   return (
     <div>
@@ -79,7 +77,7 @@ const Login = () => {
           onChange={(e) => setEmail(e.target.value)}
         />
 
-        <label for="floatingInput">Email address</label>
+        <label hmtlFor="floatingInput">Email address</label>
       </div>
       <div className="input-group mb-3">
         <div className="form-floating">
@@ -91,10 +89,14 @@ const Login = () => {
             value={password}
             onChange={(e) => setPassword(e.target.value)}
           />
-          <label for="floatingPassword">Password</label>
+          <label hmtlFor="floatingPassword">Password</label>
         </div>
         <button type="button" className="btn " onClick={handleShow}>
-          {show ? "Hide" : "Show"}
+          {show ? (
+            <i className="fa-solid fa-eye" />
+          ) : (
+            <i className="fa-solid fa-eye-slash " />
+          )}
         </button>
       </div>
 
@@ -120,6 +122,6 @@ const Login = () => {
       <ToastContainer />
     </div>
   );
-}
+};
 
-export default Login
+export default Login;

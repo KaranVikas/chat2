@@ -13,7 +13,7 @@ const CheckProfile = ({user}) => {
 
       <div
         class="offcanvas offcanvas-end"
-        tabindex="-1"
+        tabIndex="-1"
         id="offcanvasExample2"
         aria-labelledby="offcanvasExampleLabel"
       >

@@ -8,7 +8,7 @@ const ProfileModal = ({ user, children, show }) => {
           
           <div
             id="profileModal"
-            tabindex="-1"
+            tabIndex="-1"
             aria-labelledby="profileModalLabel"
             aria-hidden="true"
           >

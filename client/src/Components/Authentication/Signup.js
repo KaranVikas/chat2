@@ -1,97 +1,106 @@
-import React, { useState } from 'react'
-import axios from 'axios';
-import { useHistory } from "react-router-dom"
+import React, { useState } from "react";
+import axios from "axios";
+import { useHistory } from "react-router-dom";
 
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
 const Signup = () => {
-    const [name, setName] = useState("dd");
-    const [email, setEmail] = useState();
-    const [show, setShow] = useState(false);
-    const [password, setPassword] = useState();
-    const [confirmpassword, setConfirmpassword] = useState();
-    const [pic, setPic] = useState();
-    //const [loading, setLoading] = useState(false)
-    const history = useHistory();
-    
+  const [name, setName] = useState("dd");
+  const [email, setEmail] = useState();
+  const [show, setShow] = useState(false);
+  const [password, setPassword] = useState();
+  const [confirmpassword, setConfirmpassword] = useState();
+  const [pic, setPic] = useState();
+  //const [loading, setLoading] = useState(false)
 
-    const handleShow = () => setShow(!show);
+  const emailRegex = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
 
-    const postDetails = (pics) => { 
-        //setLoading(true)
-        if(pics === undefined){
-            const notify = () => {
-              toast("Please add image! ");
-            };
-            notify();
-            console.log("please add image")
-        }
-        if(pics.type === "image/jpeg" || pics.type === "image/png"){
-          const data = new FormData();
-          data.append("file", pics);
-          data.append("upload_preset", "project-chat");
-          data.append("cloud_name", "djtvfrn75");
-          fetch("https://api.cloudinary.com/v1_1/djtvfrn75/image/upload",{
-            method:"post",
-            body: data,
-          }).then((res) => res.json())
-            .then(data => {
-              setPic(data.url.toString());
-              console.log(data.url.toString());
-              //setLoading(false);
-            })
-        } else {
-          //toast function
-        }
-        }
-    
+  const history = useHistory();
 
-    const submitHandler = async() => {
-        console.log("clicked on submit")
-        if(!name || !email || !password || !confirmpassword){
-          const notify = () => {
-            toast.warn("Please fill all the fields! ");
-          };
-          notify();
-          console.log("please fill all fields")
-        }
-        if(password !== confirmpassword){
-          // toast function
-          const notify = () => {
-            toast.warn("Password and Confirm Password Does n't match ");
-          };
-          notify();
-          console.log("password and confirm does not match ")
-        }
+  const handleShow = () => setShow(!show);
 
-        try {
-          const config = {
-            headers: {
-              "Content-type": "application/json",
-            },
-          };
-
-          const { data } = await axios.post("/api/user",
-          {name, email, password, pic},
-          config
-           );
-           // toast function -> registration successful
-           const notify = () => {
-             toast("Registration Successful ");
-           };
-           notify();
-           console.log("registration successful")
-
-           localStorage.setItem('userInfo',JSON.stringify(data));
-           // setload
-           history.push('/chats')
-        } catch (error) {
-            // toast function -> error occured
-            console.log("no registration error occured")
-        }
-          // setloading false
+  const postDetails = (pics) => {
+    //setLoading(true)
+    if (pics === undefined) {
+      const notify = () => {
+        toast.warn("Please add image! ");
+      };
+      notify();
+      console.log("please add image");
     }
+    if (pics.type === "image/jpeg" || pics.type === "image/png") {
+      const data = new FormData();
+      data.append("file", pics);
+      data.append("upload_preset", "project-chat");
+      data.append("cloud_name", "djtvfrn75");
+      fetch("https://api.cloudinary.com/v1_1/djtvfrn75/image/upload", {
+        method: "post",
+        body: data,
+      })
+        .then((res) => res.json())
+        .then((data) => {
+          setPic(data.url.toString());
+          console.log(data.url.toString());
+          //setLoading(false);
+        });
+    } else {
+      //toast function
+    }
+  };
+
+  const submitHandler = async () => {
+    console.log("clicked on submit");
+    if (!name || !email || !password || !confirmpassword) {
+      const notify = () => {
+        toast.warn("Please fill all the fields! ");
+      };
+      notify();
+      console.log("please fill all fields");
+    }
+    if (password !== confirmpassword) {
+      // toast function
+      const notify = () => {
+        toast.warn("Password and Confirm Password Does n't match ");
+      };
+      notify();
+      console.log("password and confirm does not match ");
+    }
+    if (!emailRegex.test(email)) {
+      const notify = () => {
+        toast.warn("Email not ");
+      };
+      notify();
+    }
+
+    try {
+      const config = {
+        headers: {
+          "Content-type": "application/json",
+        },
+      };
+
+      const { data } = await axios.post(
+        "/api/user",
+        { name, email, password, pic },
+        config
+      );
+      // toast function -> registration successful
+      const notify = () => {
+        toast("Registration Successful ");
+      };
+      notify();
+      console.log("registration successful");
+
+      localStorage.setItem("userInfo", JSON.stringify(data));
+      // setload
+      history.push("/chats");
+    } catch (error) {
+      // toast function -> error occured
+      console.log("no registration error occured");
+    }
+    // setloading false
+  };
 
   return (
     <div>
@@ -104,7 +113,7 @@ const Signup = () => {
           onChange={(e) => setName(e.target.value)}
         />
 
-        <label for="floatingInput">Name</label>
+        <label htmlFor="floatingInput">Name</label>
       </div>
       <div className="form-floating mb-3">
         <input
@@ -115,7 +124,7 @@ const Signup = () => {
           onChange={(e) => setEmail(e.target.value)}
         />
 
-        <label for="floatingInput">Email address</label>
+        <label htmlFor="floatingInput">Email address</label>
       </div>
       <div className="input-group mb-3">
         <div className="form-floating">
@@ -126,10 +135,14 @@ const Signup = () => {
             placeholder="Password"
             onChange={(e) => setPassword(e.target.value)}
           />
-          <label for="floatingPassword">Password</label>
+          <label htmlFor="floatingPassword">Password</label>
         </div>
         <button type="button" className="btn btn-link" onClick={handleShow}>
-          {show ? "Hide" : "Show"}
+          {show ? (
+            <i style={{ color: "black" }} className="fa-solid fa-eye" />
+          ) : (
+            <i style={{ color: "black" }} className="fa-solid fa-eye-slash" />
+          )}
         </button>
       </div>
       <div className="input-group mb-3">
@@ -141,14 +154,18 @@ const Signup = () => {
             placeholder="Password"
             onChange={(e) => setConfirmpassword(e.target.value)}
           />
-          <label for="floatingPassword">Confirm Password</label>
+          <label htmlFor="floatingPassword">Confirm Password</label>
         </div>
         <button
           type="button"
           className="btn btn-link input-group-text"
           onClick={handleShow}
         >
-          {show ? "Hide" : "Show"}
+          {show ? (
+            <i style={{ color: "black" }} className="fa-solid fa-eye" />
+          ) : (
+            <i style={{ color: "black" }} className="fa-solid fa-eye-slash" />
+          )}
         </button>
       </div>
 
@@ -160,18 +177,27 @@ const Signup = () => {
           type="file"
           className="form-control"
           id="floatingInput"
-          placeholder="name@example.com"
+          placeholder=""
           onChange={(e) => postDetails(e.target.files[0])}
-          style={{ opacity: "0" }}
+          style={{ opacity: "1" }}
         />
 
-        <label for="floatingInput">Upload Your Picture</label>
+        <label htmlFor="floatingInput">Upload Picture</label>
       </div>
+
+      {/* <div>
+        <div className="input-group mb-3">
+          <label class="input-group-text d-none d-sm-block" for="inputGroupFile01">
+            Upload Picture
+          </label>
+          <input type="file" className="form-control" id="inputGroupFile01" onChange={(e) => postDetails(e.target.files[0])} />
+        </div>
+      </div> */}
 
       <div className="form-floating mb-3">
         <button
           type="button"
-          className="btn btn-primary"
+          className="btn btn-outline-warning"
           onClick={submitHandler}
         >
           Sign Up
@@ -180,6 +206,6 @@ const Signup = () => {
       <ToastContainer />
     </div>
   );
-}
+};
 
-export default Signup
+export default Signup;

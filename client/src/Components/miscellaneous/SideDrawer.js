@@ -1,94 +1,101 @@
-import React, { useState } from 'react'
-import { useHistory } from 'react-router-dom';
-import { ChatState } from '../../Context/ChatProvider';
-import ChatLoading from './ChatLoading';
-import Profile from './Profile';
-import ProfileModal from './ProfileModal';
-import UserListItem from '../UserAvatar/UserListItem'
-import axios from 'axios';
-import { getSender } from '../../config/ChatLogics';
+import React, { useState } from "react";
+import { useHistory } from "react-router-dom";
+import { ChatState } from "../../Context/ChatProvider";
+import ChatLoading from "./ChatLoading";
+import Profile from "./Profile";
+import ProfileModal from "./ProfileModal";
+import UserListItem from "../UserAvatar/UserListItem";
+import axios from "axios";
+import { getSender } from "../../config/ChatLogics";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
-
 const SideDrawer = () => {
-  const [search, setSearch] = useState("")
-	const [searchResult, setSearchResult] = useState([])
-	const [loading, setLoading] = useState(true)
-	const [loadingChat, setLoadingChat] = useState(false)
-	const [show, setShow] = useState(false)
+  const [search, setSearch] = useState("");
+  const [searchResult, setSearchResult] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [loadingChat, setLoadingChat] = useState(false);
+  const [show, setShow] = useState(false);
 
-	const showModal = () => {
-		setShow(show => !show)
-		console.log("clicked on show")
-	}
+  const showModal = () => {
+    setShow((show) => !show);
+    console.log("clicked on show");
+  };
 
-	const { user, setSelectedChat, chats, setChats, notification, setNotification } = ChatState();
-  const history = useHistory()
+  const {
+    user,
+    setSelectedChat,
+    chats,
+    setChats,
+    notification,
+    setNotification,
+  } = ChatState();
+
+  console.log("USER", user);
+
+  const history = useHistory();
 
   const logoutHandler = () => {
     localStorage.removeItem("userInfo");
-    console.log("userinfo deleted")
+    console.log("userinfo deleted");
     history.push("/");
+    user();
   };
 
-  
-
-  const handleSearch = async() => {
-    console.log(search)
-    if(!search){
+  const handleSearch = async () => {
+    console.log(search);
+    if (!search) {
       // toast function to throw error
       const notify = () => {
         toast.warn("Please Enter something ");
       };
       notify();
-      
-      console.log("please Enter something ")
+
+      console.log("please Enter something ");
     }
 
-    try{
+    try {
       //setLoading(true)
-      console.log(loading)
+      console.log(loading);
 
       const config = {
         headers: {
           Authorization: `Bearer ${user.token}`,
-        }
+        },
       };
-      const {data} = await axios.get(`/api/user?search=${search}`, config)
-      setLoading(false)
-      console.log({loading})
+      const { data } = await axios.get(`/api/user?search=${search}`, config);
+      setLoading(false);
+      console.log({ loading });
       setSearchResult(data);
-      console.log({data})
-    } catch (error){
+      console.log({ data });
+    } catch (error) {
       // toast function -> Failed to load the search results
-      console.log("Failed to load the Search Results")
+      console.log("Failed to load the Search Results");
     }
-  }
+  };
 
-  const accessChat = async(userId) => {
-    try{
-      setLoadingChat(true)
+  const accessChat = async (userId) => {
+    try {
+      setLoadingChat(true);
 
-        const config = {
-          headers: {
-            "Content-type":"application/json",
-            Authorization: `Bearer ${user.token}`,
-          },
-        }
+      const config = {
+        headers: {
+          "Content-type": "application/json",
+          Authorization: `Bearer ${user.token}`,
+        },
+      };
 
-        const {data} = await axios.post("/api/chat", {userId }, config);
-        // if chat is already in chat state
-        if(!chats.find((c) => c._id === data._id)) setChats([data, ...chats])
-          setSelectedChat(data);
-          setLoadingChat(false);
-          // close modal 
-    } catch (error){
+      const { data } = await axios.post("/api/chat", { userId }, config);
+      // if chat is already in chat state
+      if (!chats.find((c) => c._id === data._id)) setChats([data, ...chats]);
+      setSelectedChat(data);
+      setLoadingChat(false);
+      // close modal
+    } catch (error) {
       // toast function
-      console.log("Error fetching the chat")
+      console.log("Error fetching the chat");
     }
-
-  }
+  };
   return (
     <>
       <div
@@ -317,6 +324,6 @@ const SideDrawer = () => {
       </div>
     </>
   );
-}
+};
 
-export default SideDrawer
+export default SideDrawer;

@@ -9,6 +9,8 @@ const ChatPage = () => {
   const { user, selectedChat } = ChatState();
   const [fetchAgain, setfetchAgain] = useState(false);
 
+  console.log("user in chat page", user);
+
   return (
     <div className="container-fluid p-0 " style={{ width: "100%" }}>
       {user && <SideDrawer />}
@@ -20,8 +22,7 @@ const ChatPage = () => {
           height: "90vh",
           justifyContent: "space-between",
           paddingTop: "10px",
-          paddingLeft: "10px"
-        
+          paddingLeft: "10px",
         }}
       >
         {user && <MyChats fetchAgain={fetchAgain} />}

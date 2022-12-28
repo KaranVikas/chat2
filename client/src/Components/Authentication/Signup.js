@@ -68,7 +68,7 @@ const Signup = () => {
     }
     if (!emailRegex.test(email)) {
       const notify = () => {
-        toast.warn("Email not ");
+        toast.warn("Email invalid ");
       };
       notify();
     }
@@ -169,7 +169,7 @@ const Signup = () => {
         </button>
       </div>
 
-      <div
+      {/* <div
         className="form-floating mb-3"
         style={{ borderRadius: "0.35rem", border: "1px solid #d0d6dc" }}
       >
@@ -183,16 +183,16 @@ const Signup = () => {
         />
 
         <label htmlFor="floatingInput">Upload Picture</label>
-      </div>
+      </div> */}
 
-      {/* <div>
+      <div>
         <div className="input-group mb-3">
           <label class="input-group-text d-none d-sm-block" for="inputGroupFile01">
             Upload Picture
           </label>
           <input type="file" className="form-control" id="inputGroupFile01" onChange={(e) => postDetails(e.target.files[0])} />
         </div>
-      </div> */}
+      </div>
 
       <div className="form-floating mb-3">
         <button

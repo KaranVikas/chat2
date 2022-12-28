@@ -1,17 +1,30 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useHistory } from "react-router-dom";
+import { ChatState } from "../Context/ChatProvider";
 import Login from "./Authentication/Login";
 import Signup from "./Authentication/Signup";
+import ChatPage from "./ChatPage";
 
 const Homepage = () => {
   const history = useHistory();
+  const { user } = ChatState();
+  const [showChat, setShowChat] = useState(false);
 
   useEffect(() => {
     const user = JSON.parse(localStorage.getItem("userInfo"));
 
-    if (user) history.push("/chats");
+    // if (user) history.push("/chats");
   }, [history]);
-  return (
+
+  useEffect(() => {
+    if (user) setShowChat(true);
+    else setShowChat(false);
+    console.log("user", user);
+  }, [user]);
+
+  return showChat ? (
+    <ChatPage />
+  ) : (
     <div
       className="d-flex justify-content-center align-items-center"
       style={{ height: "100vh", backgroundColor: "#fafafa" }}

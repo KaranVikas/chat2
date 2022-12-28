@@ -4,13 +4,14 @@ import React, { useState } from "react";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { useHistory } from "react-router-dom";
+import { ChatState } from "../../Context/ChatProvider";
 const Login = () => {
   const [name, setName] = useState("");
   const [email, setEmail] = useState();
   const [show, setShow] = useState(false);
   const [password, setPassword] = useState();
   const history = useHistory();
-
+  const { setUser } = ChatState();
   const handleShow = () => setShow(!show);
 
   const submitHandler = async () => {
@@ -47,9 +48,10 @@ const Login = () => {
       //setloading false
       // if successful login push to chat page
       //  use hi
-      window.location.reload();
+      setUser(data);
+      // window.location.reload();
 
-      history.push("/chats");
+      // history.push("/chats");
     } catch (error) {
       // toast and setloading -> false
       const notify = () => {

@@ -124,9 +124,10 @@ const UpdateGroupChatModal = ({ fetchAgain, setFetchAgain, fetchMessages  }) => 
         config
       );
       setSelectedChat(data);
+      console.log("Selected Chat",selectedChat)
       // list of the chat updated with the user
       setFetchAgain(!fetchAgain);
-      //setRenameloading(false)
+      setLoading(false)
     } catch (error) {
       // toast -> Error Occured
       //setRenameloading(false)

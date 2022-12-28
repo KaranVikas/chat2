@@ -81,17 +81,17 @@ const MyChats = ({ fetchAgain }) => {
                   cursor: "pointer",
                   borderRadius: "1rem",
                   backgroundColor: `${
-                    selectedChat === chat ? "#f3f5f9" : "#E8E8E8"
+                    selectedChat === chat ? "" : "#f3f5f9"
                   }`,
                   // default choosen #f3f5f9
                   color: `${selectedChat === chat ? "" : ""}`,
                   borderLeft: `${
                     selectedChat === chat ? "6px solid #fff037" : ""
                   }`,
-                  // borderWidth: `${
-                  //   selectedChat === chat ? "2px 2px 2px 6px " : ""
-                  // }`,
-                  // borderColor: `${selectedChat === chat ? " #fff037" : ""}`,
+                  borderWidth: `${
+                    selectedChat === chat ? "2px 2px 2px 6px " : ""
+                  }`,
+                  borderColor: `${selectedChat === chat ? " #fff037" : ""}`,
                 }}
                 key={chat._id}
               >
@@ -105,7 +105,7 @@ const MyChats = ({ fetchAgain }) => {
                     style={{ width: "40px", height: "40px", objectFit: "fill" }}
                   />
                 </div>
-                <div children="flex-column">
+                <div className="d-flex flex-column align-items-start">
                   <div>
                     {!chat.isGroupChat
                       ? getSender(loggedUser, chat.users)

@@ -29,9 +29,10 @@ const SideDrawer = () => {
     setChats,
     notification,
     setNotification,
+    setUser,
   } = ChatState();
 
-  console.log("USER", user);
+  console.log("USER in side drawer", user);
 
   const history = useHistory();
 
@@ -39,7 +40,7 @@ const SideDrawer = () => {
     localStorage.removeItem("userInfo");
     console.log("userinfo deleted");
     history.push("/");
-    user();
+    setUser(null);
   };
 
   const handleSearch = async () => {

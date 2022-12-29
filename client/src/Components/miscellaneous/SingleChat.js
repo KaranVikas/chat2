@@ -52,7 +52,7 @@ const SingleChat = ({ fetchAgain, setFetchAgain }) => {
   useEffect(() => {
     socket = io(ENDPOINT);
     socket.emit("setup", user);
-    socket.on("connection", () => setsocketConnected(true));
+    socket.on("connected", () => setsocketConnected(true));
   }, []);
 
   useEffect(() => {
@@ -208,7 +208,7 @@ const SingleChat = ({ fetchAgain, setFetchAgain }) => {
             className=" container-fluid mt-2 h-100 d-flex flex-column justify-content-end"
             style={{ backgroundColor: "#f3f5f9" }}
           >
-            Message Space
+            {/* Message Space */}
             {loading ? (
               <></>
             ) : (

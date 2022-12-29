@@ -134,6 +134,7 @@ const UpdateGroupChatModal = ({ fetchAgain, setFetchAgain, fetchMessages  }) => 
     }
     setGroupChatName("");
   };
+  
   const handleSearch = async (query) => {
     setSearch(query);
     if (!query) {

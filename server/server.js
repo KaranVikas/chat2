@@ -76,11 +76,14 @@ const io = require('socket.io')(server, {
     }
 });
 
+
+// Listen for when the client connects via socket.io client
+
 io.on("connection", (socket) => {
     console.log("connected to socket.io");
-
+    // create a room for a particular user
     socket.on('setup', (userData) => {
-        // create a room for a particular user
+        // joins the user to this room
         socket.join(userData._id);
         console.log(userData._id);
         // emit in the socket

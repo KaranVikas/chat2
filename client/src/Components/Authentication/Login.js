@@ -105,7 +105,7 @@ const Login = () => {
       <div className="form-floating mb-3">
         <button
           type="button "
-          className="btn btn-warning btn-block"
+          className="btn btn-outline-warning btn-block w-100"
           onClick={submitHandler}
         >
           Login
@@ -115,7 +115,7 @@ const Login = () => {
       <div className="form-floating mb-3">
         <button
           type="button"
-          className="btn btn-outline-danger"
+          className="btn btn-outline-danger w-100"
           onClick={submitHandler2}
         >
           Get Guest User Credentials

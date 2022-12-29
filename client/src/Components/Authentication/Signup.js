@@ -197,7 +197,7 @@ const Signup = () => {
       <div className="form-floating mb-3">
         <button
           type="button"
-          className="btn btn-outline-warning"
+          className=" mt-3 btn btn-outline-warning w-100"
           onClick={submitHandler}
         >
           Sign Up

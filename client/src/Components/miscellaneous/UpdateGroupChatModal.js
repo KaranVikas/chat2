@@ -202,7 +202,7 @@ const UpdateGroupChatModal = ({ fetchAgain, setFetchAgain, fetchMessages  }) => 
               <input
                 className="form-control me-2"
                 type="search"
-                placeholder="Chat Name"
+                placeholder="Update Group Chat Name"
                 value={groupChatName}
                 onChange={(e) => setGroupChatName(e.target.value)}
               />

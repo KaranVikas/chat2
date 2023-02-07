@@ -37,7 +37,7 @@ const Homepage = () => {
           backgroundColor: "#ffffff",
         }}
       >
-        <div className="d-flex align-items-center justify-content-around">
+        {/* <div className="d-flex align-items-center justify-content-around">
         <svg
           width="50"
           height="50"
@@ -96,7 +96,7 @@ const Homepage = () => {
               <rect width="36" height="36" fill="white" />
             </clipPath>
           </defs>
-        </svg>
+        </svg> */}
 
         <h3
           className="m-3 p-3 mb-4"
@@ -104,7 +104,7 @@ const Homepage = () => {
         >
           Ding Dong
         </h3>
-        </div>
+        {/* </div> */}
         <ul
           className="nav nav-pills mb-3 justify-content-around"
           id="pills-tab"

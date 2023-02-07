@@ -94,7 +94,8 @@ const Signup = () => {
 
       localStorage.setItem("userInfo", JSON.stringify(data));
       // setload
-      history.push("/chats");
+     history.push("/chats");
+     window.location.reload()
     } catch (error) {
       // toast function -> error occured
       console.log("no registration error occured");
@@ -187,9 +188,9 @@ const Signup = () => {
 
       <div>
         <div className="input-group mb-3">
-          <label class="input-group-text d-none d-sm-block" for="inputGroupFile01">
+          {/* <label class="input-group-text d-none d-sm-block" for="inputGroupFile01">
             Upload Picture
-          </label>
+          </label> */}
           <input type="file" className="form-control" id="inputGroupFile01" onChange={(e) => postDetails(e.target.files[0])} />
         </div>
       </div>
